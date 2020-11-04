@@ -1,20 +1,51 @@
 
-var scene, camera, renderer, mesh;
+var scene, camera, renderer, mesh,skyboxGeo, skybox,controls;
 var meshFloor;
 
 var keyboard = {};
 var player = { height:1.8, speed:0.2, turnSpeed:Math.PI*0.02 };
 var USE_WIREFRAME = false;
 
+let skyboxImage = 'afterrain';
+
+function createPathStrings(filename) {
+    const basePath = `https://raw.githubusercontent.com/codypearce/some-skyboxes/master/skyboxes/${filename}/`;
+    const baseFilename = basePath + filename;
+    const fileType = filename == 'purplenebula' ? '.png' : '.jpg';
+    const sides = ['ft', 'bk', 'up', 'dn', 'rt', 'lf'];
+    const pathStings = sides.map(side => {
+      return baseFilename + '_' + side + fileType;
+    });
+  
+    return pathStings;
+  }
+  
+function createMaterialArray(filename) {
+const skyboxImagepaths = createPathStrings(filename);
+const materialArray = skyboxImagepaths.map(image => {
+    let texture = new THREE.TextureLoader().load(image);
+
+    return new THREE.MeshBasicMaterial({ map: texture, side: THREE.BackSide });
+});
+return materialArray;
+}
+  
+
 function init(){
 	scene = new THREE.Scene();
-	camera = new THREE.PerspectiveCamera(90, 1280/720, 0.1, 1000);
+    camera = new THREE.PerspectiveCamera(
+        55,
+        window.innerWidth / window.innerHeight,
+        45,
+        30000,
+      );
+    camera.position.set(1200, -250, 2000);
 	
 	mesh = new THREE.Mesh(
 		new THREE.BoxGeometry(1,1,1),
 		new THREE.MeshBasicMaterial({color:0xff4444, wireframe:USE_WIREFRAME})
 	);
-	mesh.position.y += 1; // Move the mesh up 1 meter
+	mesh.position.set(1200, -250, 200); // Move the mesh up 1 meter
 	scene.add(mesh);
 	
 	meshFloor = new THREE.Mesh(
@@ -29,7 +60,18 @@ function init(){
 	
 	renderer = new THREE.WebGLRenderer();
 	renderer.setSize(1280, 720);
-	document.body.appendChild(renderer.domElement);
+    document.body.appendChild(renderer.domElement);
+
+    const materialArray = createMaterialArray(skyboxImage);
+
+    
+
+    skyboxGeo = new THREE.BoxGeometry(10000, 10000, 10000);
+    skybox = new THREE.Mesh(skyboxGeo, materialArray);
+    console.log(skybox)
+  
+    scene.add(skybox);
+  
 	
 	animate();
 }
@@ -112,6 +154,8 @@ Tutorial Resources:
 For player movement: 
 https://www.youtube.com/watch?v=VdnN5nuxj-s
 https://github.com/saucecode/threejs-demos/blob/master/02_FloorAndMovement/demo.js 
+https://dev.to/codypearce/how-to-create-a-skybox-with-three-js-2bn8
+https://dev.to/codypearce/how-to-create-a-skybox-with-three-js-2bn8
 
 
 
