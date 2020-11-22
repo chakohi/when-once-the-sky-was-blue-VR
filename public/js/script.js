@@ -1,7 +1,16 @@
+console.log("hiii");
 
-console.log("hiii")
-
-
+AFRAME.registerComponent("foo", {
+  init: function() {
+    this.box = document.querySelector("a-box");
+    // this.rockyTerrain = document.getElementById("rockyTerrain");
+  },
+  tick: function() {
+    console.log(this.box.object3D.position);
+    this.box.setAttribute("material", "color", "red");
+    // this.rockyTerrain.setAttribute("position", { x: 0, y: -23, z: 0 });
+  }
+});
 
 /*
     
