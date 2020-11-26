@@ -22,6 +22,26 @@ AFRAME.registerComponent("calcdistance", {
     }
   })
 
+AFRAME.registerComponent("foo", {
+init: function() {
+    this.el.addEventListener("hitstart", (e)=>{
+        console.log('aaaaah')
+        console.log(
+            e.target.id,
+            "collided with",
+            e.target.components["aabb-collider"]["intersectedEls"].map(x => x.id)
+          );
+        var collidedwithid = e.target.components["aabb-collider"]["intersectedEls"][0].id
+        console.log('collidedwithid',collidedwithid)
+
+        //load new page bvased on who you collided with
+        window.location.href= collidedwithid + '.html'
+
+    })
+}
+})
+
+
 
 
 
@@ -30,6 +50,7 @@ AFRAME.registerComponent("calcdistance", {
 Useful Reosurces: 
 https://jsfiddle.net/jng091qx/
 https://aframe.io/docs/1.0.0/introduction/best-practices.html
+https://stackoverflow.com/questions/53245876/a-frame-trigger-javascript-function-on-collide-with-camera
 
 
 
