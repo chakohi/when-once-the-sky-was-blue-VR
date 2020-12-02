@@ -1,4 +1,5 @@
-// console.log(THREE);
+
+console.log("First scene aka francis 1")
 AFRAME.registerComponent("foo", {
     init: function() {
       this.box = document.querySelector("a-box");

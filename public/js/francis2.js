@@ -1,4 +1,4 @@
-console.log(THREE);
+console.log(" Second scene aka francis 2");
 AFRAME.registerComponent("foo", {
   init: function() {
     this.box = document.querySelector("a-box");
