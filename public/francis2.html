@@ -1,27 +1,38 @@
 <html>
-	<head>
-	  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-	  <script src="https://unpkg.com/aframe-aabb-collider-component@3.1.0/dist/aframe-aabb-collider-component.min.js"></script>
-	</head>
-	<body>
-	  <a-scene debug>
-  
-		<a-assets>
-		  <a-asset-item id="francis-obj" src="static/francis.obj"></a-asset-item>
-		  <a-asset-item id="francis-mtl" src="static/francis.mtl"></a-asset-item>
-		</a-assets>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-tangram-terrain-component/dist/aframe-tangram-terrain-component.min.js"></script>
+    <script src="http://threejs.org/build/three.min.js"></script>
+  </head>
+  <body>
+  <a-scene id="secondPerformance" fog="type: exponential; density: 0.001; ">
+    <a-assets>
+      <img
+        id="sky"
+        src="https://cdn.glitch.com/51bf6811-51a6-4392-8725-e93a5c65ce3b%2Fgif.gif?v=1605426636772"
+      />
+      <a-asset-item
+        id="yamlElevation"
+        src="https://raw.githubusercontent.com/tangrams/terrain-demos/master/styles/terrarium-elevation.yaml"
+      />
+      <img id="moon" src="textures/CMdOmV9W8AA5--n.png" />
+      <img id="map" src="textures/tahoe_map.jpg" />
 
-		<!-- Scene essentials -->
+      <img id="normalmap" src="textures/normalmap.png" />
+    </a-assets>
+    <a-sky
+      color="#ffc04c "
+      animation="property: material.color; dur: 3000;
+  from: #ffc04c ; to: #4c0000;
+  loop: false; dir: alternate"
+    ></a-sky>
 
-		<a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" scale=" 5 5 1"></a-plane>
-		<a-sky color="#6EBAA7"></a-sky>
-		<a-camera foo geometry="primitive: box" aabb-collider="objects: a-entity"></a-camera>
-		
-        <!-- 3D models -->
-        
-
-	  </a-scene>
-	  <script src="js/script.js"></script>
-	</body>
-
+    <a-camera foo position="0 1 0">
+      <a-cursor color="#FF0000" />
+    </a-camera>
+    <a-box color="green" position="0 0 3"> </a-box>
+  </a-scene>
+  <script src="js/francis2.js"></script>
+</body>
 </html>
+

@@ -1,7 +1,4 @@
-
-console.log("hiii");
-console.log(document.querySelector('a-entity'));
-
+console.log("Lobby scene")
 AFRAME.registerComponent("calcdistance", {
     init: function() {
         this.cam = document.querySelector("a-camera")
@@ -40,19 +37,3 @@ init: function() {
     })
 }
 })
-
-
-
-
-
-
-/*
-Useful Reosurces: 
-https://jsfiddle.net/jng091qx/
-https://aframe.io/docs/1.0.0/introduction/best-practices.html
-https://stackoverflow.com/questions/53245876/a-frame-trigger-javascript-function-on-collide-with-camera
-
-
-
-
-*/
