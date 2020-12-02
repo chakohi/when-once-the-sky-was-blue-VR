@@ -1,11 +1,10 @@
 <html>
   <head>
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-tangram-terrain-component/dist/aframe-tangram-terrain-component.min.js"></script>
-    <script src="http://threejs.org/build/three.min.js"></script>
+    <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
   </head>
   <body>
-    <a-scene id="secondPerformance" fog="type: exponential; density: 0.001; ">
+    <a-scene id="secondPerformance">
       <a-assets>
         <img
           id="sky"
@@ -20,22 +19,22 @@
 
         <img id="normalmap" src="textures/normalmap.png" />
       </a-assets>
+      <a-sky
+        color="#ffc04c "
+        animation="property: material.color; dur: 3000;
+    from: #ffc04c ; to: #4c0000;
+    loop: false; dir: alternate"
+      ></a-sky>
+      <a-entity position="0 2.25 -15" particle-system="preset: dust"></a-entity>
+
+      <a-camera foo position="0 1 0">
+        <a-cursor color="#FF0000" />
+      </a-camera>
       <a-entity
         id="particles"
         position="0 5 -15"
         particle-system="color: #FF4500,#FFF; size: 0.5; positionSpread: 25 25 25; texture: ./textures/particletexture.png; accelerationValue: 0 -1.2 0; velocityValue: 0 0.001 0; maxParticleCount: 2500; rotationAngle: 1.4"
       ></a-entity>
-      <a-sky
-        color="#ffc04c "
-        animation="property: material.color; dur: 3000;
-  from: #ffc04c ; to: #4c0000;
-  loop: false; dir: alternate"
-      ></a-sky>
-
-      <a-camera foo position="0 1 0">
-        <a-cursor color="#FF0000" />
-      </a-camera>
-      <a-box color="green" position="0 0 3"> </a-box>
     </a-scene>
     <script src="js/francis2.js"></script>
   </body>
