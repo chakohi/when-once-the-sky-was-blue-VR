@@ -12,4 +12,3 @@ AFRAME.registerComponent("foo", {
     // this.rockyTerrain.setAttribute("position", { x: 0, y: -23, z: 0 });
   }
 });
-

@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-tangram-terrain-component/dist/aframe-tangram-terrain-component.min.js"></script>
+    <script src="http://threejs.org/build/three.min.js"></script>
+  </head>
+  <body>
+  <a-scene id="secondPerformance" fog="type: exponential; density: 0.001; ">
+    <a-assets>
+      <img
+        id="sky"
+        src="https://cdn.glitch.com/51bf6811-51a6-4392-8725-e93a5c65ce3b%2Fgif.gif?v=1605426636772"
+      />
+      <a-asset-item
+        id="yamlElevation"
+        src="https://raw.githubusercontent.com/tangrams/terrain-demos/master/styles/terrarium-elevation.yaml"
+      />
+      <img id="moon" src="textures/CMdOmV9W8AA5--n.png" />
+      <img id="map" src="textures/tahoe_map.jpg" />
+
+      <img id="normalmap" src="textures/normalmap.png" />
+    </a-assets>
+    <a-sky
+      color="#ffc04c "
+      animation="property: material.color; dur: 3000;
+  from: #ffc04c ; to: #4c0000;
+  loop: false; dir: alternate"
+    ></a-sky>
+
+    <a-camera foo position="0 1 0">
+      <a-cursor color="#FF0000" />
+    </a-camera>
+    <a-box color="green" position="0 0 3"> </a-box>
+  </a-scene>
+</body>
+</html>
+

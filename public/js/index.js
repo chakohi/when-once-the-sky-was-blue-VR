@@ -1,4 +1,4 @@
-console.log(THREE);
+// console.log(THREE);
 AFRAME.registerComponent("foo", {
   init: function() {
     this.box = document.querySelector("a-box");
@@ -12,4 +12,3 @@ AFRAME.registerComponent("foo", {
     // this.rockyTerrain.setAttribute("position", { x: 0, y: -23, z: 0 });
   }
 });
-
