@@ -1,0 +1,51 @@
+html,body{
+    background-color: black;
+    text-align: center;
+
+}
+
+h1,h2{
+    color: white;
+}
+
+.textcontainer{
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 60%;
+    height: 100px;
+}
+.nodisplay{
+    display: none;
+    
+}
+#textcontainer1{
+    font-family: 'Roboto', sans-serif;
+}
+
+.roboticfont{
+    font-family: 'JetBrains Mono', monospace;
+}
+/* #text1{
+    display: none;
+}
+
+#text2{
+    display: none;
+}
+
+#textcontainer2{
+    display: none;
+}
+#textcontainer3{
+    display: none;
+}
+#textcontainer4{
+    display: none;
+}
+#textcontainer5{
+    display: none;
+} */
