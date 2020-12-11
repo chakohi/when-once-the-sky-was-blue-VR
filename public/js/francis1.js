@@ -1,4 +1,3 @@
-
 console.log("First scene aka francis 1")
 AFRAME.registerComponent("foo", {
     init: function() {
@@ -64,6 +63,7 @@ AFRAME.registerComponent("shaperain", {
       
       if (zPos > 6){
         zPos = -1; 
+        shape.setAttribute('color',getRandomColor())
       }
 
 
@@ -76,7 +76,15 @@ AFRAME.registerComponent("shaperain", {
     // this.rockyTerrain.setAttribute("position", { x: 0, y: -23, z: 0 });
   }
 });
-
+//https://stackoverflow.com/questions/1484506/random-color-generator
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
 
 
 
