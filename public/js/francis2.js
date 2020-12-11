@@ -52,10 +52,13 @@ AFRAME.registerComponent("foo", {
         scene2El.setAttribute("visible", "true");
         skyElementSecond.setAttribute("animation", "autoplay", true);
       } else if (collidedwithid == "francis1") {
-        state = 3;
-        lobbyEl.setAttribute("visible", "false");
-        scene1El.setAttribute("visible", "true");
-        skyElementFirst.setAttribute("animation", "autoplay", true);
+        // state = 3;
+        // lobbyEl.setAttribute("visible", "false");
+        // scene1El.setAttribute("visible", "true");
+        window.location.href = 'francis1.html';
+
+
+        // skyElementFirst.setAttribute("animation", "autoplay", true);
       } else if (collidedwithid == "francis3") {
         state = 4;
         lobbyEl.setAttribute("visible", "false");
@@ -119,3 +122,5 @@ AFRAME.registerComponent("foo", {
     }
   }
 });
+
+
