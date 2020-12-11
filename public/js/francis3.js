@@ -19,5 +19,8 @@ AFRAME.registerComponent("foo", {
       y: planePos,
       z: camPos.z
     });
+    if (planePos < -20) {
+      window.location.href =  "/lobby";
+    }
   }
 });

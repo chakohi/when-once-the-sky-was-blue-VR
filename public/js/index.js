@@ -33,7 +33,8 @@ AFRAME.registerComponent("foo", {
       console.log("collidedwithid", collidedwithid);
 
       //load new page bvased on who you collided with
-      window.location.href = collidedwithid + ".html";
+      
+      window.location.href = "/scene"+collidedwithid.slice(-1);
     });
   }
 });
