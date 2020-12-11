@@ -18,7 +18,6 @@ AFRAME.registerComponent("foo", {
 AFRAME.registerComponent("shaperain", {
   init: function() {
   //console.log('shape-man');
-
   this.shapesreference = []
   let countX = 10;
   this.shapes = [];
@@ -62,6 +61,11 @@ AFRAME.registerComponent("shaperain", {
       let xPos = shapePos['x'];
       let yPos = shapePos['y'];
       let zPos = shapePos['z'] + 0.01;
+      
+      if (zPos > 6){
+        zPos = -1; 
+      }
+
 
       console.log(xPos,yPos,zPos);
       shape.setAttribute('position',xPos.toString()+ ' '+yPos.toString() +' '+ zPos.toString())
