@@ -1,55 +1,54 @@
-html,body{
-    background-color: black;
-    text-align: center;
-    height: 100%;
-    margin: 0; 
-    overflow: hidden;
-
+html,
+body {
+  background-color: black;
+  text-align: center;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
 }
 
-img{
-    width: 20%;
-    height: 30%;
+img {
 }
 
-h1,h2{
-    color: white;
+h1,
+h2 {
+  color: white;
 }
 
-.textcontainer{
-    margin-top:40vh;
-    height: 100%;
+.textcontainer {
+  margin-top: 40vh;
+  height: 100%;
 }
-.nodisplay{
-    display: none;
-    
+.nodisplay {
+  display: none;
 }
-#textcontainer1{
-    font-family: 'Roboto', sans-serif;
-}
-
-.roboticfont{
-    font-family: 'JetBrains Mono', monospace;
+#textcontainer1 {
+  font-family: "Roboto", sans-serif;
 }
 
-#textcontainer4{
-    margin-top: 20vh;
+.roboticfont {
+  font-family: "JetBrains Mono", monospace;
+}
+
+#textcontainer4 {
+  margin-top: 20vh;
 }
 
 button {
-    background-color: rgb(68, 68, 68); /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
+  background-color: rgb(68, 68, 68); /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
 }
-button a{
-    text-decoration: none;
-    color: white;
+button a {
+  text-decoration: none;
+  color: white;
+  font-family: "JetBrains Mono", monospace;
 }
 /* #text1{
     display: none;

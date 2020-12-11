@@ -4,20 +4,14 @@
     <script src="https://unpkg.com/aframe-tangram-terrain-component/dist/aframe-tangram-terrain-component.min.js"></script>
     <script src="http://threejs.org/build/three.min.js"></script>
   </head>
+  <!-- animation="property: fog.color; dur: 4000;
+  from: #ffffff; to: #a6a6a6;
+  loop: false; dir: alternate" -->
   <body>
     <a-scene
-<<<<<<< HEAD
+      shaperain
       id="firstPerformance"
       fog="type: exponential; density: 0.0014; "
-      animation="property: fog.color; dur: 4000;
-=======
-    shaperain
-    id="firstPerformance"
-    fog="type: exponential; density: 0.0014; "
-    animation="property: fog.color; dur: 4000;
->>>>>>> main
-  from: #ffffff; to: #a6a6a6;
-  loop: false; dir: alternate"
     >
       <a-assets>
         <img
@@ -34,8 +28,9 @@
         <img id="normalmap" src="textures/normalmap.png" />
       </a-assets>
       <a-sky
+        id="scene1Sky"
         color="#ffff00 "
-        animation="property: material.color; dur: 40000;
+        animation="property: material.color; dur: 4000;
     from: #ffff00 ; to: #340034;
     loop: false; dir: alternate"
       ></a-sky>
@@ -57,9 +52,8 @@
         material=" displacementMap: #map; displacementScale: 200;roughness: 1; normalMap: #map; normalScale: 10; color: #474747;"
       ></a-entity>
       <a-camera foo position="0 1 0">
-        <a-cursor color="#FF0000" />
+        <a-cursor color="#FFFFFF" />
       </a-camera>
-      <a-box color="green" position="0 0 3"> </a-box>
     </a-scene>
     <script src="js/francis1.js"></script>
   </body>
