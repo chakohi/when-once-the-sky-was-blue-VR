@@ -21,6 +21,9 @@ app.get("/", (req, res) => {
 app.get("/lobby", (req, res) => {
   res.sendFile(path.join(__dirname, "public/", "lobby.html"));
 });
+app.get("/performance", (req, res) => {
+  res.sendFile(path.join(__dirname, "public/", "main.html"));
+});
 app.get("/scene1", (req, res) => {
   res.sendFile(path.join(__dirname, "public/", "francis1.html"));
 });

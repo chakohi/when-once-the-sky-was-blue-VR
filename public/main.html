@@ -1,0 +1,187 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-particle-system-component@1.1.3/dist/aframe-particle-system-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-tangram-terrain-component/dist/aframe-tangram-terrain-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-aabb-collider-component@3.1.0/dist/aframe-aabb-collider-component.min.js"></script>
+  </head>
+
+  <!-- Color for landscape scene 1: material="roughness: 1; normalMap: #map; normalScale: 10; color: #110611;" -->
+
+  <body>
+    <a-scene vr-mode-ui="enabled: false">
+      <a-assets>
+        <a-asset-item id="francis-obj" src="static/francis.obj"></a-asset-item>
+        <a-asset-item id="francis-mtl" src="static/francis.mtl"></a-asset-item>
+        <img id="skymap" src="textures/sky2.png" crossorigin="anonymous" />
+
+        <img
+          id="sky"
+          src="https://cdn.glitch.com/51bf6811-51a6-4392-8725-e93a5c65ce3b%2Fgif.gif?v=1605426636772"
+        />
+        <a-asset-item
+          id="yamlElevation"
+          src="https://raw.githubusercontent.com/tangrams/terrain-demos/master/styles/terrarium-elevation.yaml"
+        />
+        <img id="moon" src="textures/CMdOmV9W8AA5--n.png" />
+        <img id="map" src="textures/tahoe_map.jpg" />
+
+        <img id="normalmap" src="textures/normalmap.png" />
+        <img id="skyOne" src="textures/starry.png" />
+
+        <img
+          id="normalMapCracks"
+          src="textures/cracksTextures/crackNormal.png"
+        />
+        <img
+          id="cracksTexture"
+          src="textures/cracksTextures/crackTexture.png"
+        />
+        <img id="cracksWhite" src="textures/cracksTextures/crackWhite.png" />
+      </a-assets>
+      <a-entity id="lobby" visible="true">
+        <!-- <a-plane
+
+          width="4"
+          height="4"
+          color=""
+          scale=" 5 5 1"
+        ></a-plane> -->
+        <a-entity
+        geometry="primitive: plane; width: 10000; height: 10000; segmentsHeight: 20; segmentsWidth: 20;"
+        position="0 0 -4"
+        rotation="-90 0 0"
+        material="color: #222"
+      ></a-entity>
+        <a-sky color="#000000"></a-sky>
+        <a-camera
+          foo
+          id="lobbyCam"
+          geometry="primitive: box"
+          aabb-collider="objects: a-entity"
+        ></a-camera>
+
+        <a-entity
+          id="francis1"
+          obj-model="obj: #francis-obj; mtl: #francis-mtl"
+          position="-5.048 -0.238 -3"
+          scale="0.704 0.704 0.704"
+        ></a-entity>
+        <a-entity
+          id="francis2"
+          obj-model="obj: #francis-obj; mtl: #francis-mtl"
+          position="0 -0.238 -6.897"
+          scale="0.704 0.704 0.704"
+        ></a-entity>
+        <a-entity
+          id="francis3"
+          obj-model="obj: #francis-obj; mtl: #francis-mtl"
+          position="4.748 -0.238 -3"
+          scale="0.704 0.704 0.704"
+        ></a-entity>
+      </a-entity>
+      <a-entity shaperain id="firstPerformance" visible="false">
+        <a-sky
+          id="scene1Sky"
+          geometry="primitive:sphere; radius:170; phiLength:360; phiStart:0; thetaLength:90"
+          material="shader:flat; side:back; height:2048; src:#skymap; width:2048;"
+          animation="property: material.color; dur: 20000;
+          from: #ffff00 ; to: #ff5cff;
+          loop: false; dir: alternate; autoplay: false"
+        ></a-sky>
+        <a-entity
+          geometry="primitive: plane; width: 340; height: 340; segmentsHeight: 0; segmentsWidth: 0;"
+          rotation="-90 0 0"
+          position="0 0 0"
+          material="roughness: 1; normalMap: #normalMapCracks; normalScale: 10; color: #0f0f0f; src:#cracksWhite; repeat: 22 22"
+        ></a-entity>
+        <a-entity
+          id="floorToFadeScene1"
+          geometry="primitive: plane; width: 340; height: 340; segmentsHeight: 0; segmentsWidth: 0;"
+          rotation="-90 0 0"
+          position="0 0 0"
+          material="roughness: 1; normalScale: 10; color: #0f0f0f;"
+          animation="property: material.opacity; dur: 20000;
+          from:0; to: 1;
+          loop: false; dir: alternate; autoplay: false"
+        ></a-entity>
+        <!-- <a-entity
+          id="terrain"
+          visible="true"
+          geometry="primitive: plane; buffer: true;
+width: 1100; height: 1100; 
+segmentsWidth: 30; segmentsHeight: 1; "
+          material="wireframe: false; displacementScale: 10; color:#676667; roughness: 1;"
+          rotation="-90 0 0"
+          position="0 0 0"
+        >
+        </a-entity>
+        <a-entity
+          geometry="primitive: plane; width: 900; height: 900; segmentsHeight: 20; segmentsWidth: 20;"
+          rotation="-90 0 0"
+          position="0 -100 0"
+          material=" displacementMap: #map; displacementScale: 200;roughness: 1; normalMap: #map; normalScale: 10; color: #474747;"
+        ></a-entity> -->
+        <!-- <a-camera         id="cameraOne"
+      foo wasd-controls="enabled: false" position="0 1 0">
+        <a-cursor color="#FFFFFF" />
+      </a-camera> -->
+      </a-entity>
+
+      <a-entity id="secondPerformance" visible="false">
+        <a-sky
+          id="scene2Sky"
+          color="#ffc04c "
+          animation="property: material.color; dur: 20000;
+        from: #ffc04c ; to: #4c0000;
+        loop: false; dir: alternate; autoplay: false"
+        ></a-sky>
+        <a-entity
+          position="0 2.25 -15"
+          particle-system="preset: dust"
+        ></a-entity>
+
+        <!-- <a-camera id="cameraTwo" wasd-controls="enabled: false" foo position="0 1 0">
+        <a-cursor color="#FFFFFF" />
+      </a-camera> -->
+        <a-entity
+          id="particles"
+          position="0 5 -15"
+          particle-system="opacity:color: #FF4500,#FFF; size: 0.5; positionSpread: 25 25 25; texture: ./textures/particletexture.png; accelerationValue: 0 -1.2 0; velocityValue: 0 0.001 0; maxParticleCount: 2500; rotationAngle: 1.4"
+          animation__2="property: opacity; dur: 5000;
+        from: 0; to: 1;
+        loop: false; dir: alternate; autoplay: true"
+        ></a-entity>
+      </a-entity>
+      <a-entity id="thirdPerformance" visible="false">
+        <a-sky
+          src="#skyOne"
+          geometry="radius: 100; thetaLength: 100"
+          rotation="-90 0 0"
+        ></a-sky>
+
+        <a-sky
+          src="#skyOne"
+          geometry="radius: 100; thetaLength: 100; primitive: box; width: 100; height: 100; depth: 100;"
+          rotation="90 0 0"
+        ></a-sky>
+        <a-entity
+          id="planeToFollow"
+          geometry="primitive: plane; width: 2; height: 2; segmentsHeight: 20; segmentsWidth: 20;"
+          rotation="-90 0 0"
+          position="0 0 0"
+          material="color: #ffffff"
+        ></a-entity>
+        <!-- <a-camera
+        id="cameraThree"
+        wasd-controls="enabled: false"
+        foo
+        position="0 1 0"
+      >
+        <a-cursor color="#FFFFFF" />
+      </a-camera> -->
+      </a-entity>
+    </a-scene>
+    <script src="js/main.js"></script>
+  </body>
+</html>
