@@ -6,9 +6,11 @@ let greenVal = 0;
 let blueVal = 0;
 let scene2El;
 let lobbyEl;
+let cameraLobby;
+let cameraTwo, cameraOne;
 //state counter 0 = lobby, francis1 = first scene, francis2 = second, etc.
 var state = 0;
-
+let floorToFadeScene1;
 //scene 3
 let planePos = 0;
 let scene3Cam;
@@ -18,9 +20,17 @@ let scene1El;
 AFRAME.registerComponent("foo", {
   init: function() {
     // this.box = document.querySelector("a-box");
-    scene3Cam = document.querySelector("#scene3Cam");
     this.plane = document.querySelector("#planeToFollow");
     this.cam = document.querySelector("#lobbyCam");
+    floorToFadeScene1 = document.querySelector("#floorToFadeScene1");
+    // cameraLobby = document.querySelector("#lobbyCam");
+    // cameraOne = document.querySelector("#cameraOne");
+    // cameraTwo = document.querySelector("#cameraTwo");
+    // cameraThree = document.querySelector("#cameraThree");
+    // cameraThree.setAttribute("camera", "active: false");
+    // cameraTwo.setAttribute("camera", "active: false");
+    // cameraOne.setAttribute("camera", "active: false");
+    // cameraLobby.setAttribute("camera", "active: true");
 
     lobbyEl = document.querySelector("#lobby");
     scene2El = document.querySelector("#secondPerformance");
@@ -44,7 +54,7 @@ AFRAME.registerComponent("foo", {
         e.target.components["aabb-collider"]["intersectedEls"].map(x => x.id)
       );
       var collidedwithid =
-        e.target.components["aabb-collider"]["intersectedEls"][0].id;
+        e.target.components["aabb-collider"]["intersectedEls"][1].id;
       console.log("collidedwithid", collidedwithid);
       if (collidedwithid == "francis2") {
         state = 2;
@@ -52,13 +62,12 @@ AFRAME.registerComponent("foo", {
         scene2El.setAttribute("visible", "true");
         skyElementSecond.setAttribute("animation", "autoplay", true);
       } else if (collidedwithid == "francis1") {
-        // state = 3;
-        // lobbyEl.setAttribute("visible", "false");
-        // scene1El.setAttribute("visible", "true");
-        window.location.href = 'francis1.html';
-
-
-        // skyElementFirst.setAttribute("animation", "autoplay", true);
+        state = 3;
+        lobbyEl.setAttribute("visible", "false");
+        scene1El.setAttribute("visible", "true");
+        // window.location.href = 'francis1.html';
+        floorToFadeScene1.setAttribute("animation", "autoplay", true);
+        skyElementFirst.setAttribute("animation", "autoplay", true);
       } else if (collidedwithid == "francis3") {
         state = 4;
         lobbyEl.setAttribute("visible", "false");
@@ -71,7 +80,6 @@ AFRAME.registerComponent("foo", {
       state == 2 &&
       skyElementSecond.components.material.material.color.r <= 0.3
     ) {
-      console.log("decrementing");
       skyElementSecond.setAttribute(
         "material",
         "color",
@@ -93,9 +101,10 @@ AFRAME.registerComponent("foo", {
     }
     if (state == 3) {
       console.log(
-        "in state 3: " + skyElementFirst.components.material.material.color.r
+        "in state 3: " + skyElementFirst.components.material.material.color.g
       );
-      if (skyElementFirst.components.material.material.color.r < 0.21) {
+      if (skyElementFirst.components.material.material.color.g < 0.37) {
+        console.log("decrementing");
         state = 0;
         scene1El.setAttribute("visible", false);
         lobbyEl.setAttribute("visible", true);
@@ -111,9 +120,18 @@ AFRAME.registerComponent("foo", {
       } else {
         planePos -= 0.02;
         console.log("planePos is: " + planePos);
+        if (planePos <= -30) {
+          state = 0;
+          scene3El.setAttribute("visible", false);
+          lobbyEl.setAttribute("visible", true);
+          this.cam.setAttribute("position", {
+            x: 0,
+            y: 1,
+            z: 0
+          });
+        }
       }
-      let camPos = document.querySelector("#scene3Cam").object3D.position;
-
+      let camPos = document.querySelector("#lobbyCam").object3D.position;
       this.plane.setAttribute("position", {
         x: camPos.x,
         y: planePos,
@@ -122,5 +140,3 @@ AFRAME.registerComponent("foo", {
     }
   }
 });
-
-
