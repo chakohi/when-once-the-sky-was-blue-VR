@@ -32,14 +32,14 @@ AFRAME.registerComponent("foo", {
     // cameraOne.setAttribute("camera", "active: false");
     // cameraLobby.setAttribute("camera", "active: true");
 
-    lobbyEl = document.querySelector("#lobby");
-    scene2El = document.querySelector("#secondPerformance");
-    scene1El = document.querySelector("#firstPerformance");
-    scene3El = document.querySelector("#thirdPerformance");
+    // lobbyEl = document.querySelector("#lobby");
+    // scene2El = document.querySelector("#secondPerformance");
+    // scene1El = document.querySelector("#firstPerformance");
+    // scene3El = document.querySelector("#thirdPerformance");
 
     skyElementSecond = document.querySelector("#scene2Sky");
-    skyElementFirst = document.querySelector("#scene1Sky");
-    this.plane = document.querySelector("#planeToFollow");
+    // skyElementFirst = document.querySelector("#scene1Sky");
+    // this.plane = document.querySelector("#planeToFollow");
 
     scene1El.setAttribute("visible", "false");
     scene2El.setAttribute("visible", "false");
@@ -77,7 +77,6 @@ AFRAME.registerComponent("foo", {
   },
   tick: function(time) {
     if (
-      state == 2 &&
       skyElementSecond.components.material.material.color.r <= 0.3
     ) {
       skyElementSecond.setAttribute(
@@ -89,9 +88,9 @@ AFRAME.registerComponent("foo", {
         redVal -= 1;
       }
       if (redVal < 1) {
-        scene2El.setAttribute("visible", false);
-        lobbyEl.setAttribute("visible", true);
         state = 0;
+        window.location.href =  "/lobby";
+
         this.cam.setAttribute("position", {
           x: 0,
           y: 1,
@@ -140,3 +139,7 @@ AFRAME.registerComponent("foo", {
     }
   }
 });
+
+
+/*Socket IO side */
+var socket = io.connect();

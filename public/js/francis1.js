@@ -14,6 +14,8 @@ AFRAME.registerComponent("foo", {
 });
 
 
+var counter = 0;
+
 AFRAME.registerComponent("shaperain", {
   init: function() {
   //console.log('shape-man');
@@ -54,6 +56,9 @@ AFRAME.registerComponent("shaperain", {
     console.log("raaain");
     console.log(this.shapes)
     this.shapes.forEach(function(shape){
+      if (counter > 30){
+        window.location.href = '/lobby';
+      }
 
       let shapePos = shape.getAttribute('position')
       // console.log(shapePos);
@@ -61,7 +66,8 @@ AFRAME.registerComponent("shaperain", {
       let yPos = shapePos['y'];
       let zPos = shapePos['z'] + 0.01;
       
-      if (zPos > 6){
+      if (zPos > 9){
+        counter+=1;
         zPos = -1; 
         shape.setAttribute('color',getRandomColor())
       }
@@ -89,6 +95,8 @@ function getRandomColor() {
 
 
 
+/*Socket IO side */
+var socket = io.connect();
 
 
 
