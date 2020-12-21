@@ -24,3 +24,7 @@ AFRAME.registerComponent("foo", {
     }
   }
 });
+
+
+/*Socket IO side */
+var socket = io.connect();

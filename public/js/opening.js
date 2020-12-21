@@ -36,3 +36,9 @@ $(document).ready(function() {
 function reload() {
   window.location.reload(false);
 }
+
+
+
+
+
+var socket = io().connect()

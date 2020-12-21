@@ -95,6 +95,8 @@ function getRandomColor() {
 
 
 
+/*Socket IO side */
+var socket = io.connect();
 
 
 
