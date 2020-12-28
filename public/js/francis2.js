@@ -6,32 +6,30 @@ let greenVal = 0;
 let blueVal = 0;
 let scene2El;
 let lobbyEl;
-let cameraLobby;
-let cameraTwo, cameraOne;
 //state counter 0 = lobby, francis1 = first scene, francis2 = second, etc.
 var state = 0;
 let floorToFadeScene1;
 //scene 3
 let planePos = 0;
-let scene3Cam;
 let scene3El;
-
+let francis1Torus, francis2Torus, francis3Torus;
+let francisTorus1Increment = 0;
+let francisTorus2Increment, francisTorus3Increment;
+let francis1;
+let currHoverFrancis;
 let scene1El;
 AFRAME.registerComponent("foo", {
   init: function() {
     // this.box = document.querySelector("a-box");
+    francis1 = document.querySelector("#francis1");
     this.plane = document.querySelector("#planeToFollow");
     this.cam = document.querySelector("#lobbyCam");
     floorToFadeScene1 = document.querySelector("#floorToFadeScene1");
-    // cameraLobby = document.querySelector("#lobbyCam");
-    // cameraOne = document.querySelector("#cameraOne");
-    // cameraTwo = document.querySelector("#cameraTwo");
-    // cameraThree = document.querySelector("#cameraThree");
-    // cameraThree.setAttribute("camera", "active: false");
-    // cameraTwo.setAttribute("camera", "active: false");
-    // cameraOne.setAttribute("camera", "active: false");
-    // cameraLobby.setAttribute("camera", "active: true");
-
+    francis1Torus = document.querySelector("#francis1Light");
+    francis2Torus = document.querySelector("#francis2Light");
+    document
+      .querySelector("#raycastCube")
+      .setAttribute("material", "opacity", "0");
     lobbyEl = document.querySelector("#lobby");
     scene2El = document.querySelector("#secondPerformance");
     scene1El = document.querySelector("#firstPerformance");
@@ -46,36 +44,99 @@ AFRAME.registerComponent("foo", {
     scene3El.setAttribute("visible", "false");
     // scene1El.addEventListener("loaded", function() {
     // scene1El.pause();
-    console.log(skyElementFirst.components.animate);
-    this.el.addEventListener("hitstart", e => {
-      console.log(
-        e.target.id,
-        "collided with",
-        e.target.components["aabb-collider"]["intersectedEls"].map(x => x.id)
-      );
-      var collidedwithid =
-        e.target.components["aabb-collider"]["intersectedEls"][1].id;
-      console.log("collidedwithid", collidedwithid);
-      if (collidedwithid == "francis2") {
-        state = 2;
-        lobbyEl.setAttribute("visible", "false");
-        scene2El.setAttribute("visible", "true");
-        skyElementSecond.setAttribute("animation", "autoplay", true);
-      } else if (collidedwithid == "francis1") {
-        state = 3;
-        lobbyEl.setAttribute("visible", "false");
-        scene1El.setAttribute("visible", "true");
-        // window.location.href = 'francis1.html';
-        floorToFadeScene1.setAttribute("animation", "autoplay", true);
-        skyElementFirst.setAttribute("animation", "autoplay", true);
-      } else if (collidedwithid == "francis3") {
-        state = 4;
-        lobbyEl.setAttribute("visible", "false");
-        scene3El.setAttribute("visible", "true");
-      }
-    });
+
+    //   this.el.addEventListener("hitstart", e => {
+    //     console.log(
+    //       e.target.id,
+    //       "collided with",
+    //       e.target.components["aabb-collider"]["intersectedEls"].map(x => x.id)
+    //     );
+    //     var collidedwithid =
+    //       e.target.components["aabb-collider"]["intersectedEls"][1].id;
+    //     if (collidedwithid == "francis1") {
+    //       francisTorus1Increment++;
+    //       console.log(francisTorus1Increment);
+    //       if (francisTorus1Increment == 360) {
+    //         state = 3;
+    //         lobbyEl.setAttribute("visible", "false");
+    //         scene1El.setAttribute("visible", "true");
+    //         // window.location.href = 'francis1.html';
+    //         floorToFadeScene1.setAttribute("animation", "autoplay", true);
+    //         skyElementFirst.setAttribute("animation", "autoplay", true);
+    //       }
+    //     } else if (collidedwithid == "francis2") {
+    //       state = 2;
+    //       lobbyEl.setAttribute("visible", "false");
+    //       scene2El.setAttribute("visible", "true");
+    //       skyElementSecond.setAttribute("animation", "autoplay", true);
+    //     } else if (collidedwithid == "francis3") {
+    //       state = 4;
+    //       lobbyEl.setAttribute("visible", "false");
+    //       scene3El.setAttribute("visible", "true");
+    //     }
+    //   });
   },
   tick: function(time) {
+    // console.log(currHoverFrancis);
+    if (state == 0) {
+      if (currHoverFrancis == "francis1") {
+        console.log("in francis 1!");
+        console.log(
+          "should be outputting light intensity: " +
+            document.querySelector("#francis1LightTwo").components.light.light
+              .intensity
+        );
+
+        if (
+          document.querySelector("#francis1LightTwo").components.light.light
+            .intensity > 5.8
+        ) {
+          console.log("really intense!");
+          state = 3;
+          lobbyEl.setAttribute("visible", "false");
+          scene1El.setAttribute("visible", "true");
+          floorToFadeScene1.setAttribute("animation", "autoplay", true);
+          skyElementFirst.setAttribute("animation", "autoplay", true);
+        }
+        // if (time % 2 == 0) {
+        //   francis1Torus.setAttribute("intensity", francisTorus1Increment);
+        //   francisTorus1Increment += 0.1;
+        // }
+        // setTimeout(function() {
+        //   francis1Torus.setAttribute("visible", true);
+        // }, 200);
+        // if (francisTorus1Increment >= 390) {
+        //   francis1Torus.setAttribute("visible", false);
+        //   state = 3;
+        //   lobbyEl.setAttribute("visible", "false");
+        //   scene1El.setAttribute("visible", "true");
+        //   floorToFadeScene1.setAttribute("animation", "autoplay", true);
+        //   skyElementFirst.setAttribute("animation", "autoplay", true);
+        //   francisTorus1Increment = 0;
+        // }
+      } else if (currHoverFrancis == "francis2") {
+        francis2Torus.setAttribute("arc", `${francisTorus2Increment}`);
+        francisTorus2Increment += 15;
+        setTimeout(function() {
+          francis2Torus.setAttribute("visible", true);
+        }, 300);
+        if (francisTorus2Increment >= 390) {
+          state = 2;
+          lobbyEl.setAttribute("visible", "false");
+          scene2El.setAttribute("visible", "true");
+          skyElementSecond.setAttribute("animation", "autoplay", true);
+          francisTorus2Increment = 0;
+        }
+      } else {
+        // francis1Torus.setAttribute("visible", false);
+        francis2Torus.setAttribute("visible", false);
+        // francis3Torus.setAttribute("visible", false);
+
+        francisTorus1Increment = 0;
+        francisTorus2Increment = 0;
+        francisTorus3Increment = 0;
+      }
+    }
     if (
       state == 2 &&
       skyElementSecond.components.material.material.color.r <= 0.3
@@ -92,6 +153,7 @@ AFRAME.registerComponent("foo", {
         scene2El.setAttribute("visible", false);
         lobbyEl.setAttribute("visible", true);
         state = 0;
+        currHoverFrancis = null;
         this.cam.setAttribute("position", {
           x: 0,
           y: 1,
@@ -104,8 +166,8 @@ AFRAME.registerComponent("foo", {
         "in state 3: " + skyElementFirst.components.material.material.color.g
       );
       if (skyElementFirst.components.material.material.color.g < 0.37) {
-        console.log("decrementing");
         state = 0;
+        currHoverFrancis = null;
         scene1El.setAttribute("visible", false);
         lobbyEl.setAttribute("visible", true);
         this.cam.setAttribute("position", {
@@ -136,6 +198,97 @@ AFRAME.registerComponent("foo", {
         x: camPos.x,
         y: planePos,
         z: camPos.z
+      });
+    }
+  }
+});
+// AFRAME.registerComponent("francis1mouseenter", {
+//   init: function() {
+//     this.el.addEventListener("click", function(evt) {
+//       currHoverFrancis = "francis1";
+//     });
+//     this.el.addEventListener("mouseleave", function(evt) {
+//       currHoverFrancis = null;
+//     });
+//   }
+// });
+
+// AFRAME.registerComponent("francis2mouseenter", {
+//   init: function() {
+//     this.el.addEventListener("click", function(evt) {
+//       currHoverFrancis = "francis2";
+//       console.log("in francis2");
+//     });
+//     this.el.addEventListener("mouseleave", function(evt) {
+//       currHoverFrancis = null;
+//     });
+//   }
+// });
+
+// AFRAME.registerComponent("francis3mouseenter", {
+//   init: function() {
+//     this.el.addEventListener("click", function(evt) {
+//       console.log("hellooo3");
+//     });
+//     this.el.addEventListener("mouseleave", function(evt) {
+//       console.log("byeee3");
+//     });
+//   }
+// });
+AFRAME.registerComponent("raycastscript", {
+  // dependencies: ["raycaster"],
+  init: function() {
+    // this.el.addEventListener("raycaster-intersected", function(evt) {
+    //   this.raycastID = evt.srcElement.id;
+    //   currHoverFrancis = evt.srcElement.id;
+    // });
+    // this.el.addEventListener("raycaster-intersected-cleared", function(evt) {
+    //   console.log("left the object");
+    //   currHoverFrancis = null;
+    //   francis1Torus.setAttribute("visible", false);
+    //   francisTorus1Increment = 0;
+    //   francis1Torus.setAttribute("arc", `${francisTorus1Increment}`);
+    // });
+    this.el.addEventListener("hitstart", e => {
+      console.log(
+        e.target.id,
+        "collided with",
+        e.target.components["aabb-collider"]["intersectedEls"].map(x => x.id)
+      );
+      var collidedwithid =
+        e.target.components["aabb-collider"]["intersectedEls"][2].id;
+      console.log(collidedwithid);
+      if (collidedwithid == "francis1") {
+        document
+          .querySelector("#francis1LightTwo")
+          .setAttribute("animation", "autoplay", true);
+        currHoverFrancis = "francis1";
+      } else if (collidedwithid == "francis2") {
+        currHoverFrancis = "francis2";
+      } else if (collidedwithid == "francis3") {
+        state = 4;
+        lobbyEl.setAttribute("visible", "false");
+        scene3El.setAttribute("visible", "true");
+      }
+    });
+  },
+  tick: function(time) {
+    if (time) {
+      let translatedPos = document
+        .querySelector("#lobbyCam")
+        .object3D.getWorldDirection();
+      // console.log(new_pos);
+      document.querySelector("#raycastCube").setAttribute("position", {
+        x:
+          document.querySelector("#lobbyCam").object3D.position.x +
+          -translatedPos.x * 2.5,
+        y:
+          document.querySelector("#lobbyCam").object3D.position.y +
+          0.7 +
+          -translatedPos.y * 1.5,
+        z:
+          document.querySelector("#lobbyCam").object3D.position.z +
+          -translatedPos.z * 2.5
       });
     }
   }
