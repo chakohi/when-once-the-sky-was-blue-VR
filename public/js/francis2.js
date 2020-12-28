@@ -115,26 +115,32 @@ AFRAME.registerComponent("foo", {
         //   francisTorus1Increment = 0;
         // }
       } else if (currHoverFrancis == "francis2") {
-        francis2Torus.setAttribute("arc", `${francisTorus2Increment}`);
-        francisTorus2Increment += 15;
-        setTimeout(function() {
-          francis2Torus.setAttribute("visible", true);
-        }, 300);
-        if (francisTorus2Increment >= 390) {
+        if (
+          document.querySelector("#francis2LightTwo").components.light.light
+            .intensity > 5.8
+        ) {
           state = 2;
           lobbyEl.setAttribute("visible", "false");
           scene2El.setAttribute("visible", "true");
           skyElementSecond.setAttribute("animation", "autoplay", true);
           francisTorus2Increment = 0;
         }
-      } else {
+      } else if (currHoverFrancis == "francis3") {
+        if (
+          document.querySelector("#francis3LightTwo").components.light.light
+            .intensity > 5.8
+        ) {
+          state = 4;
+          lobbyEl.setAttribute("visible", "false");
+          scene3El.setAttribute("visible", "true");
+        }
         // francis1Torus.setAttribute("visible", false);
-        francis2Torus.setAttribute("visible", false);
+        // francis2Torus.setAttribute("visible", false);
         // francis3Torus.setAttribute("visible", false);
 
-        francisTorus1Increment = 0;
-        francisTorus2Increment = 0;
-        francisTorus3Increment = 0;
+        // francisTorus1Increment = 0;
+        // francisTorus2Increment = 0;
+        // francisTorus3Increment = 0;
       }
     }
     if (
@@ -264,11 +270,15 @@ AFRAME.registerComponent("raycastscript", {
           .setAttribute("animation", "autoplay", true);
         currHoverFrancis = "francis1";
       } else if (collidedwithid == "francis2") {
+        document
+          .querySelector("#francis2LightTwo")
+          .setAttribute("animation", "autoplay", true);
         currHoverFrancis = "francis2";
       } else if (collidedwithid == "francis3") {
-        state = 4;
-        lobbyEl.setAttribute("visible", "false");
-        scene3El.setAttribute("visible", "true");
+        document
+          .querySelector("#francis3LightTwo")
+          .setAttribute("animation", "autoplay", true);
+        currHoverFrancis = "francis3";
       }
     });
   },
