@@ -37,11 +37,16 @@ app.get("/scene3", (req, res) => {
 var userCount = 0;
 io.sockets.on('connection', function (socket) {
   console.log('new connection: ' + socket.id);
-  console.log('yayayayay')
   userCount++;
-  console.log(userCount)
+  console.log('User Count: ',userCount)
+  socket.emit('usersConnected', userCount);
+  socket.on('disconnect',function(){
+    console.log(' the following user just left :( ->' + socket.id);
+    userCount--;
+    console.log('User Count: ',userCount)
+  
+  })
 
 });
-
 
 console.log('Server Running in Port: ',port);
