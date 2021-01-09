@@ -39,6 +39,7 @@ io.sockets.on('connection', function (socket) {
   console.log('new connection: ' + socket.id);
   userCount++;
   console.log('User Count: ',userCount)
+  socket.emit('usersConnected', userCount);
   socket.on('disconnect',function(){
     console.log(' the following user just left :( ->' + socket.id);
     userCount--;

@@ -143,3 +143,10 @@ AFRAME.registerComponent("foo", {
 
 /*Socket IO side */
 var socket = io.connect();
+
+var numUsers = 0;
+
+socket.on('usersConnected', function(data){
+  console.log("Num of users connected ",data);
+  numUsers = data;
+})
