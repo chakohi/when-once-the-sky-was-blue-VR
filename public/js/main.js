@@ -32,14 +32,14 @@ AFRAME.registerComponent("foo", {
     // cameraOne.setAttribute("camera", "active: false");
     // cameraLobby.setAttribute("camera", "active: true");
 
-    // lobbyEl = document.querySelector("#lobby");
-    // scene2El = document.querySelector("#secondPerformance");
-    // scene1El = document.querySelector("#firstPerformance");
-    // scene3El = document.querySelector("#thirdPerformance");
+    lobbyEl = document.querySelector("#lobby");
+    scene2El = document.querySelector("#secondPerformance");
+    scene1El = document.querySelector("#firstPerformance");
+    scene3El = document.querySelector("#thirdPerformance");
 
     skyElementSecond = document.querySelector("#scene2Sky");
-    // skyElementFirst = document.querySelector("#scene1Sky");
-    // this.plane = document.querySelector("#planeToFollow");
+    skyElementFirst = document.querySelector("#scene1Sky");
+    this.plane = document.querySelector("#planeToFollow");
 
     scene1El.setAttribute("visible", "false");
     scene2El.setAttribute("visible", "false");
