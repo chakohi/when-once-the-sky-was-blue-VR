@@ -44,8 +44,11 @@ io.sockets.on('connection', function (socket) {
     console.log(' the following user just left :( ->' + socket.id);
     userCount--;
     console.log('User Count: ',userCount)
+    //update the user count for all users on every disconnect event;
+    socket.emit('usersConnected', userCount);
   
   })
+  
 
 });
 
