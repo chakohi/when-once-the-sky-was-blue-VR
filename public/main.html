@@ -13,6 +13,8 @@
       <a-assets>
         <a-asset-item id="francis-obj" src="static/francis.obj"></a-asset-item>
         <a-asset-item id="francis-mtl" src="static/francis.mtl"></a-asset-item>
+        <a-asset-item id="cloak-obj" src="static/cloak.obj"></a-asset-item>
+        <a-asset-item id="cloak-mtl" src="static/cloak.mtl"></a-asset-item>
         <a-asset-item id="human-obj" src="static/human.obj"></a-asset-item>
 
         <img id="skymap" src="textures/sky2.png" crossorigin="anonymous" />
@@ -41,7 +43,7 @@
         />
         <img id="cracksWhite" src="textures/cracksTextures/crackWhite.png" />
       </a-assets>
-      <a-entity id="lobby" visible="true">
+      <a-entity id="lobby" visible="true" shadows>
         <!-- <a-plane
 
           width="4"
@@ -65,19 +67,23 @@
 
         <a-entity
           id="shadow_francis"
-          obj-model="obj: #francis-obj; mtl: #francis-mtl"
-          position="-8 -0.238 -3"
-          scale="0.704 0.704 0.704"
-          model-opacity="0.5"
+          obj-model="obj: #cloak-obj; mtl: #cloak-mtl"
+          position="-11.374 -0.238 -11.213"
+          scale="0.03 0.03 0.03"
+          rotation="0 57.656 0"
         >
-            <a-animation attribute="model-opacity"
+            <!-- <a-animation attribute="model-opacity"
             dur="10000"
             from="1"
             to="0"
-            repeat="indefinite"></a-animation>
+            repeat="indefinite"></a-animation> -->
       
       
         </a-entity>
+
+        <div id="shadows"> 
+
+        </div>
 
         <a-entity position="0 2.25 -15" particle-system="preset: dust"></a-entity>
 

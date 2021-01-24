@@ -9,9 +9,6 @@ var socket = require('socket.io');
 var io = socket(server, {'transports': ['websocket', 'polling']});
 
 
-
-
-// using production build of main react app
 app.use(express.static(path.join(__dirname, "public/")));
 
 app.get("/", (req, res) => {
