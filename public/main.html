@@ -64,14 +64,14 @@
           geometry="primitive: box"
           aabb-collider="objects: a-entity"
         ></a-camera>
-
+<!-- 
         <a-entity
           id="shadow_francis"
           obj-model="obj: #cloak-obj; mtl: #cloak-mtl"
-          position="-11.374 -0.238 -11.213"
           scale="0.03 0.03 0.03"
+          position="-11.374 -0.238 -11.213"
           rotation="0 57.656 0"
-        >
+        > -->
             <!-- <a-animation attribute="model-opacity"
             dur="10000"
             from="1"
@@ -79,7 +79,7 @@
             repeat="indefinite"></a-animation> -->
       
       
-        </a-entity>
+        <!-- </a-entity> -->
 
         <div id="shadows"> 
 
@@ -89,21 +89,23 @@
 
         <a-entity
           id="francis1"
-          obj-model="obj: #francis-obj; mtl: #francis-mtl"
+          obj-model="obj: #cloak-obj; mtl: #cloak-mtl"
+          scale="0.03 0.03 0.03"
           position="-5.048 -0.238 -3"
-          scale="0.704 0.704 0.704"
+          rotation="0 50 0"
         ></a-entity>
         <a-entity
           id="francis2"
-          obj-model="obj: #francis-obj; mtl: #francis-mtl"
+          obj-model="obj: #cloak-obj; mtl: #cloak-mtl"
+          scale="0.03 0.03 0.03"
           position="0 -0.238 -6.897"
-          scale="0.704 0.704 0.704"
         ></a-entity>
         <a-entity
           id="francis3"
-          obj-model="obj: #francis-obj; mtl: #francis-mtl"
+          obj-model="obj: #cloak-obj; mtl: #cloak-mtl"
+          scale="0.03 0.03 0.03"
           position="4.748 -0.238 -3"
-          scale="0.704 0.704 0.704"
+          rotation="0 -50 0"
         ></a-entity>
       </a-entity>
       <a-entity shaperain id="firstPerformance" visible="false">
