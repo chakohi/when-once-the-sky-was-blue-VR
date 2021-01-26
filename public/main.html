@@ -13,6 +13,10 @@
       <a-assets>
         <a-asset-item id="francis-obj" src="static/francis.obj"></a-asset-item>
         <a-asset-item id="francis-mtl" src="static/francis.mtl"></a-asset-item>
+        <a-asset-item id="cloak-obj" src="static/cloak.obj"></a-asset-item>
+        <a-asset-item id="cloak-mtl" src="static/cloak.mtl"></a-asset-item>
+        <a-asset-item id="human-obj" src="static/human.obj"></a-asset-item>
+
         <img id="skymap" src="textures/sky2.png" crossorigin="anonymous" />
 
         <img
@@ -39,7 +43,7 @@
         />
         <img id="cracksWhite" src="textures/cracksTextures/crackWhite.png" />
       </a-assets>
-      <a-entity id="lobby" visible="true">
+      <a-entity id="lobby" visible="true" shadows>
         <!-- <a-plane
 
           width="4"
@@ -60,24 +64,48 @@
           geometry="primitive: box"
           aabb-collider="objects: a-entity"
         ></a-camera>
+<!-- 
+        <a-entity
+          id="shadow_francis"
+          obj-model="obj: #cloak-obj; mtl: #cloak-mtl"
+          scale="0.03 0.03 0.03"
+          position="-11.374 -0.238 -11.213"
+          rotation="0 57.656 0"
+        > -->
+            <!-- <a-animation attribute="model-opacity"
+            dur="10000"
+            from="1"
+            to="0"
+            repeat="indefinite"></a-animation> -->
+      
+      
+        <!-- </a-entity> -->
+
+        <div id="shadows"> 
+
+        </div>
+
+        <a-entity position="0 2.25 -15" particle-system="preset: dust"></a-entity>
 
         <a-entity
           id="francis1"
-          obj-model="obj: #francis-obj; mtl: #francis-mtl"
+          obj-model="obj: #cloak-obj; mtl: #cloak-mtl"
+          scale="0.03 0.03 0.03"
           position="-5.048 -0.238 -3"
-          scale="0.704 0.704 0.704"
+          rotation="0 50 0"
         ></a-entity>
         <a-entity
           id="francis2"
-          obj-model="obj: #francis-obj; mtl: #francis-mtl"
+          obj-model="obj: #cloak-obj; mtl: #cloak-mtl"
+          scale="0.03 0.03 0.03"
           position="0 -0.238 -6.897"
-          scale="0.704 0.704 0.704"
         ></a-entity>
         <a-entity
           id="francis3"
-          obj-model="obj: #francis-obj; mtl: #francis-mtl"
+          obj-model="obj: #cloak-obj; mtl: #cloak-mtl"
+          scale="0.03 0.03 0.03"
           position="4.748 -0.238 -3"
-          scale="0.704 0.704 0.704"
+          rotation="0 -50 0"
         ></a-entity>
       </a-entity>
       <a-entity shaperain id="firstPerformance" visible="false">

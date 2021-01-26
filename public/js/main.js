@@ -144,9 +144,96 @@ AFRAME.registerComponent("foo", {
 /*Socket IO side */
 var socket = io.connect();
 
-var numUsers = 0;
+var numUsers = 1;
 
-socket.on('usersConnected', function(data){
-  console.log("Num of users connected ",data);
-  numUsers = data;
-})
+var requestAnimationFrame = window.requestAnimationFrame       ||
+                            window.webkitRequestAnimationFrame ||
+                            window.mozRequestAnimationFrame    ||
+                            window.msRequestAnimationFrame; 
+var time = 0;
+var fps = 60; //frames per second to determine how many frames I want per second   
+
+const socket_loop = () => {
+    //use set timeout function to slowdown animation frame.
+    setTimeout(function(){
+        requestAnimationFrame(socket_loop)
+        console.log("Num of users connected ",numUsers);
+        socket.on('usersConnected', function(data){
+          numUsers = data;
+        });
+    },1000 / fps)
+    
+  }
+
+socket_loop();
+
+/*Change color
+of Francis to make it look like a shadow
+
+From : https://gist.github.com/Strae/8b62ee637699b4218b53b3f158351864
+ */
+
+AFRAME.registerComponent('model-opacity', {
+  schema: {default: 1.0},
+  init: function () {
+    this.el.addEventListener('model-loaded', this.update.bind(this));
+  },
+  update: function () {
+    var mesh = this.el.getObject3D('mesh');
+    var data = this.data;
+    console.log(data)
+    console.log('sisis')
+    if (!mesh) { return; }
+    mesh.traverse(function (node) {
+      if (node.isMesh) {
+        console.log('hii')
+        node.material.opacity = data;
+        node.material.transparent = data < 1.0;
+        node.material.needsUpdate = true;
+      }
+    });
+  }
+});
+
+
+AFRAME.registerComponent("shadows", {
+  init: function() {
+  //console.log('shape-man');
+
+  console.log("Create shadows")
+  },
+  tick: function() {
+    let sceneEl = document.querySelector('a-scene');
+    this.shadows = [];
+    for (var i =0;i<numUsers;i++){
+      this.shadows[i] = document.createElement('a-entity');
+      let x = getRandomArbitrary(0,6);
+      let y = getRandomArbitrary(0,6);
+      let z = -3;
+      document.getElementById('shadows').append(
+      `<a-entity
+        id="shadow_francis_${numUsers}"
+        obj-model="obj: #francis-obj; mtl: #francis-mtl"
+        position="${x} ${y} ${z}"
+        scale="0.704 0.704 0.704"
+        model-opacity="0.5"
+      >
+          <a-animation attribute="model-opacity"
+          dur="10000"
+          from="1"
+          to="0"
+          repeat="indefinite"></a-animation>
+    
+    
+      </a-entity>`
+      )
+
+    }
+  }
+});
+
+
+
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}

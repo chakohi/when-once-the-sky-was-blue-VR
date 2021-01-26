@@ -9,9 +9,6 @@ var socket = require('socket.io');
 var io = socket(server, {'transports': ['websocket', 'polling']});
 
 
-
-
-// using production build of main react app
 app.use(express.static(path.join(__dirname, "public/")));
 
 app.get("/", (req, res) => {
@@ -44,8 +41,11 @@ io.sockets.on('connection', function (socket) {
     console.log(' the following user just left :( ->' + socket.id);
     userCount--;
     console.log('User Count: ',userCount)
+    //update the user count for all users on every disconnect event;
+    socket.emit('usersConnected', userCount);
   
   })
+  
 
 });
 
