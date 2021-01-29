@@ -15,6 +15,13 @@ h2 {
   color: white;
 }
 
+h1 {
+  font-size: 28px;
+}
+
+h2 {
+  font-size: 22px;
+}
 .textcontainer {
   margin-top: 40vh;
   height: 100%;
@@ -38,17 +45,32 @@ button {
   background-color: rgb(68, 68, 68); /* Green */
   border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 18px 36px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
+  border: rgba(255, 255, 255, 0) 1.2px solid;
 }
 button a {
   text-decoration: none;
   color: white;
   font-family: "JetBrains Mono", monospace;
+  transition: border 1s;
+}
+button:hover {
+  border: white 1.2px solid;
+}
+
+#text4_image {
+  margin-top: 30px;
+}
+
+#text5_image {
+  width: 180px;
+  height: auto;
+  margin: 30px auto 30px auto;
 }
 /* #text1{
     display: none;
@@ -72,3 +94,19 @@ button a {
     height: 100px;
     top:0;
 } */
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.a-loader-title {
+  color: white;
+  margin-top: 20%;
+  font-family: "Roboto", sans-serif;
+  font-size: 30px;
+  animation: 0.8s ease-out 0s 1 slideInFromLeft;
+}

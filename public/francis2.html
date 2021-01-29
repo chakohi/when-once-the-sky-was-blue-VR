@@ -5,12 +5,20 @@
     <script src="https://unpkg.com/aframe-tangram-terrain-component/dist/aframe-tangram-terrain-component.min.js"></script>
     <script src="https://unpkg.com/aframe-aabb-collider-component@3.1.0/dist/aframe-aabb-collider-component.min.js"></script>
     <script src="https://unpkg.com/aframe-lensflare-component/dist/aframe-lensflare-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-proxy-event-component/dist/aframe-proxy-event-component.min.js"></script>
+    <link rel="stylesheet" href="static/opening.css" />
   </head>
 
   <!-- Color for landscape scene 1: material="roughness: 1; normalMap: #map; normalScale: 10; color: #110611;" -->
 
   <body>
-    <a-scene vr-mode-ui="enabled: false">
+    <title>
+      When Once The Sky Was Blue
+    </title>
+    <a-scene
+      loading-screen="dotsColor: white; backgroundColor: black"
+      vr-mode-ui="enabled: false"
+    >
       <a-assets>
         <a-asset-item id="francis-obj" src="static/francis.obj"></a-asset-item>
         <a-asset-item id="francis-mtl" src="static/francis.mtl"></a-asset-item>
@@ -39,7 +47,6 @@
           src="textures/cracksTextures/crackTexture.png"
         />
         <img id="cracksWhite" src="textures/cracksTextures/crackWhite.png" />
-        <a-mixin id="red" material="color: red"></a-mixin>
       </a-assets>
       <a-entity id="lobby" visible="true">
         <a-plane
@@ -51,14 +58,35 @@
           scale=" 5 5 1"
           animation="property: color; dur: 4000;
           from: #ffffff; to: #222;
-          loop: false; reapeat: 3; dir: alternate; autoplay: true"
+          loop: false; dir: alternate; autoplay: true"
         ></a-plane>
         <a-sky
+          id="lobbySky"
           color="#ffffff"
-          animation="property: color; dur: 4000;
+          animation__one="property: color; dur: 4000;
         from: #ffffff; to: #000000;
-        loop: false; reapeat: 3; dir: alternate; autoplay: true"
-        ></a-sky>
+        loop: false; dir: alternate; autoplay: true"
+          animation="property: color; from:#000000; to: #ffffff; loop: 1; dur: 2000; delay:100; dir: alternate; autoplay: false"
+        >
+        </a-sky>
+        <a-sky
+          id="lobbySkyTransitionTwo"
+          color="#ffffff"
+          animation__one="property: color; dur: 4000;
+      from: #ffffff; to: #000000;
+      loop: false;  dir: alternate; autoplay: true"
+          animation="property: color; dir: alternate; dur: 1800; delay: 50; loop: false; repeat: 1; from: #000000; to: #ffffff; autoplay: false"
+        >
+        </a-sky>
+        <a-sky
+          id="lobbySkyTransitionThree"
+          color="#ffffff"
+          animation__one="property: color; dur: 4000;
+    from: #ffffff; to: #000000;
+    loop: false; dir: alternate; autoplay: true"
+          animation="property: color; dir: alternate; dur: 1800; delay: 50; loop: false; repeat: 1; from: #000000; to: #ffffff; autoplay: false"
+        >
+        </a-sky>
         <!-- <a-entity
           position="0 1 0"
           camera
@@ -76,14 +104,14 @@
           <a-entity camera foo look-controls wasd-controls id="lobbyCam">
             <a-entity
               id="cursorReticle"
-              position="0 0 -1.9"
+              position="0 0 -1.2"
               animation__click="property: geometry.thetaLength; startEvents: click; easing: easeInCubic; dur: 2000; from: 359; to: 360"
               animation__fusing="property: geometry.thetaLength; startEvents: fusing; easing: easeInCubic; dur: 1500; from: 0; to: 359"
               animation__mouseleave="property: geometry.thetaLength; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 0"
-              geometry="primitive: ring; radiusInner: 0.03; radiusOuter: 0.045;"
+              geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.035;"
               material="color: black; shader: flat; opacity: 1"
-              cursor="maxDistance: 4; fuse: true"
-              raycaster="far: 2"
+              cursor="maxDistance: 3; fuse: true"
+              raycaster="far: 3; objects: .francis"
             >
             </a-entity>
           </a-entity>
@@ -174,22 +202,8 @@
           position="-5.048 -0.238 -3"
           scale="0.704 0.704 0.704"
           light="type: hemisphere; color: white; intensity: 0;"
-          animation__rotation="property: light.intensity; from:0; to: 5; loop: 1; dur: 2000; delay:100; dir: alternate; startEvents: click;"
-          sky="color: white"
+          animation__rotation="property: light.intensity; from:0; to: 6; loop: 1; dur: 2000; delay:100; dir: alternate; startEvents: click;"
         >
-          <!-- animation="property: intensity; dur: 4000;
-        from: 6; to: 0.3;
-        loop: false; reapeat: 3; dir: alternate; autoplay: true" -->
-          >
-          <a-light
-            type="point"
-            intensity="1"
-            id="francis2Light"
-            color="white"
-            distance="3.6"
-            position="0 1 -6"
-          >
-          </a-light>
         </a-entity>
         <a-torus
           id="francis1Torus"
@@ -230,6 +244,18 @@
      loop: false; reapeat: 3; dir: alternate; autoplay: false"
         >
         </a-light>
+        <a-light
+          type="point"
+          intensity="1"
+          id="francis3LightTwo"
+          color="white"
+          distance="3.6"
+          position="4.748 0.4 -3"
+          animation="property: intensity; dur: 4000;
+   from: 0.6; to: 6;
+   loop: false; reapeat: 3; dir: alternate; autoplay: false"
+        >
+        </a-light>
         <a-torus
           id="francis2Torus"
           color="white"
@@ -251,7 +277,7 @@
           position="0 -0.238 -6.897"
           scale="0.704 0.704 0.704"
           light="type: hemisphere; color: white; intensity: 0;"
-          animation__rotation="property: light.intensity; from:0; to: 5; loop: 1; dur: 2000; delay:100; dir: alternate; startEvents: click;"
+          animation__rotation="property: light.intensity; from:0; to: 6; loop: 1; dur: 2000; delay:100; dir: alternate; startEvents: click;"
         ></a-entity>
         <a-entity
           francis3mouseenter
@@ -261,7 +287,7 @@
           position="4.748 -0.238 -3"
           scale="0.704 0.704 0.704"
           light="type: hemisphere; color: white; intensity: 0;"
-          animation__rotation="property: light.intensity; from:0; to: 5; loop: 1; dur: 2000; delay:100; dir: alternate; startEvents: click;"
+          animation__rotation="property: light.intensity; from:0; to: 6; loop: 1; dur: 2000; delay:100; dir: alternate; startEvents: click;"
         ></a-entity>
         <!-- <a-light
           type="point"

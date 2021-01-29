@@ -1,6 +1,6 @@
 let skyElementSecond;
 let skyElementFirst;
-
+let lobbySkyTransition, lobbySkyTransitionTwo, lobbySkyTransitionThree;
 let redVal = 76;
 let greenVal = 0;
 let blueVal = 0;
@@ -29,6 +29,16 @@ AFRAME.registerComponent("foo", {
     floorToFadeScene1 = document.querySelector("#floorToFadeScene1");
     francis1Torus = document.querySelector("#francis1Light");
     francis2Torus = document.querySelector("#francis2Light");
+    lobbySkyTransition = document.querySelector("#lobbySky");
+    lobbySkyTransitionTwo = document.querySelector("#lobbySkyTransitionTwo");
+    lobbySkyTransitionThree = document.querySelector(
+      "#lobbySkyTransitionThree"
+    );
+
+    lobbySkyTransition.setAttribute("visible", true);
+    lobbySkyTransitionTwo.setAttribute("visible", false);
+    lobbySkyTransitionThree.setAttribute("visible", false);
+
     document
       .querySelector("#raycastCube")
       .setAttribute("material", "opacity", "0");
@@ -83,37 +93,14 @@ AFRAME.registerComponent("foo", {
     if (state == 0) {
       if (
         document.querySelector("#francis1").components.light.light.intensity >
-        4.5
+        0.1
       ) {
-        console.log("really intense!");
-        state = 3;
-        lobbyEl.setAttribute("visible", "false");
-        scene1El.setAttribute("visible", "true");
-        floorToFadeScene1.setAttribute("animation", "autoplay", true);
-        skyElementFirst.setAttribute("animation", "autoplay", true);
-      }
-      if (
-        document.querySelector("#francis2").components.light.light.intensity >
-        4.5
-      ) {
-        state = 2;
-        lobbyEl.setAttribute("visible", "false");
-        scene2El.setAttribute("visible", "true");
-        skyElementSecond.setAttribute("animation", "autoplay", true);
-        francisTorus2Increment = 0;
-      }
-      if (
-        document.querySelector("#francis3").components.light.light.intensity >
-        4.5
-      ) {
-        state = 4;
-        lobbyEl.setAttribute("visible", "false");
-        scene3El.setAttribute("visible", "true");
-      }
-      if (currHoverFrancis == "francis1") {
+        console.log("should be shining!");
+        lobbySkyTransition.setAttribute("visible", "true");
+        lobbySkyTransition.setAttribute("animation", "autoplay", true);
         if (
           document.querySelector("#francis1").components.light.light.intensity >
-          4.5
+          5.2
         ) {
           console.log("really intense!");
           state = 3;
@@ -121,6 +108,68 @@ AFRAME.registerComponent("foo", {
           scene1El.setAttribute("visible", "true");
           floorToFadeScene1.setAttribute("animation", "autoplay", true);
           skyElementFirst.setAttribute("animation", "autoplay", true);
+          lobbySkyTransition.setAttribute("material", "color", "rgb(0, 0, 0)");
+        }
+      }
+      if (
+        document.querySelector("#francis2").components.light.light.intensity >
+        0.1
+      ) {
+        console.log("should be shining!");
+        lobbySkyTransition.setAttribute("visible", "false");
+        lobbySkyTransitionTwo.setAttribute("visible", "true");
+        lobbySkyTransitionTwo.setAttribute("animation", "autoplay", true);
+        if (
+          document.querySelector("#francis2").components.light.light.intensity >
+          5.2
+        ) {
+          state = 2;
+          lobbyEl.setAttribute("visible", "false");
+          scene2El.setAttribute("visible", "true");
+          lobbySkyTransition.setAttribute("visible", "true");
+          lobbySkyTransitionTwo.setAttribute("visible", "false");
+
+          skyElementSecond.setAttribute("animation", "autoplay", true);
+          francisTorus2Increment = 0;
+        }
+      }
+      if (
+        document.querySelector("#francis3").components.light.light.intensity >
+        0.1
+      ) {
+        console.log("should be shining!");
+        lobbySkyTransition.setAttribute("visible", "false");
+        lobbySkyTransitionThree.setAttribute("visible", "true");
+        lobbySkyTransitionThree.setAttribute("animation", "autoplay", true);
+        if (
+          document.querySelector("#francis3").components.light.light.intensity >
+          5.2
+        ) {
+          state = 4;
+          lobbySkyTransition.setAttribute("visible", "true");
+          lobbySkyTransitionThree.setAttribute("visible", "false");
+          lobbyEl.setAttribute("visible", "false");
+          scene3El.setAttribute("visible", "true");
+        }
+      }
+      if (currHoverFrancis == "francis1") {
+        if (
+          document.querySelector("#francis1").components.light.light.intensity >
+          0.1
+        ) {
+          console.log("should be shining!");
+          lobbySky.setAttribute("animation", "autoplay", true);
+          if (
+            document.querySelector("#francis1").components.light.light
+              .intensity > 4.9
+          ) {
+            console.log("really intense!");
+            state = 3;
+            lobbyEl.setAttribute("visible", "false");
+            scene1El.setAttribute("visible", "true");
+            floorToFadeScene1.setAttribute("animation", "autoplay", true);
+            skyElementFirst.setAttribute("animation", "autoplay", true);
+          }
         }
         // if (cursorReticle.components.material.material.opacity == 1) {
         //   console.log("begin transition!");
@@ -160,7 +209,7 @@ AFRAME.registerComponent("foo", {
       } else if (currHoverFrancis == "francis2") {
         if (
           document.querySelector("#francis2LightTwo").components.light.light
-            .intensity > 5.8
+            .intensity > 4.9
         ) {
           state = 2;
           lobbyEl.setAttribute("visible", "false");
@@ -171,7 +220,7 @@ AFRAME.registerComponent("foo", {
       } else if (currHoverFrancis == "francis3") {
         if (
           document.querySelector("#francis3LightTwo").components.light.light
-            .intensity > 5.8
+            .intensity > 4.9
         ) {
           state = 4;
           lobbyEl.setAttribute("visible", "false");
