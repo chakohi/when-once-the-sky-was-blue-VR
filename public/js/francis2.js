@@ -254,7 +254,7 @@ AFRAME.registerComponent("foo", {
         currHoverFrancis = null;
         this.cam.setAttribute("position", {
           x: 0,
-          y: 1,
+          y: 0,
           z: 0
         });
       }
@@ -270,7 +270,7 @@ AFRAME.registerComponent("foo", {
         lobbyEl.setAttribute("visible", true);
         this.cam.setAttribute("position", {
           x: 0,
-          y: 1,
+          y: 0,
           z: 0
         });
       }
@@ -286,7 +286,7 @@ AFRAME.registerComponent("foo", {
           lobbyEl.setAttribute("visible", true);
           this.cam.setAttribute("position", {
             x: 0,
-            y: 1,
+            y: 0,
             z: 0
           });
         }
