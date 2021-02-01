@@ -85,11 +85,9 @@
           animation="property: color; dir: alternate; dur: 1800; delay: 50; loop: false; repeat: 1; from: #000000; to: #ffffff; autoplay: false"
         >
         </a-sky>
-        <a-entity position="-3.5 1 0">
-          <a-entity mixin="cube red"> </a-entity>
-        </a-entity>
         <a-entity position="0 1 0">
           <a-entity camera foo look-controls wasd-controls id="lobbyCam">
+            <!-- this is the cursor, the startEvents: click is what triggers transitions in #francis1 #francis2 #francis3-->
             <a-entity
               id="cursorReticle"
               position="0 0 -1.2"
@@ -124,7 +122,7 @@
           from: #ffffff; to: #BBB;
           loop: false; reapeat: 3; dir: alternate; autoplay: true"
         ></a-entity>
-
+        <!-- all these lights are used to transition between scenes and when entering the lobby as well -->
         <a-light
           type="point"
           intensity="1"
@@ -184,6 +182,7 @@
    loop: false; reapeat: 3; dir: alternate; autoplay: false"
         >
         </a-light>
+        <!-- event from cursor is what triggers this, triggered when the cursor reticls becomes a full circle. -->
         <a-entity
           francis2mouseenter
           id="francis2"
