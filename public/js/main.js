@@ -164,7 +164,7 @@ const socket_loop = () => {
           // remove existing shadows = 
           if (numUsers>0){
             for (var i=0;i<numUsers;i++){
-              removeObject(i)
+              // removeObject(i)
             }
           }
 
@@ -173,7 +173,8 @@ const socket_loop = () => {
           // create new shadows = 
           if (numUsers>0){
             for (var i=0;i<numUsers;i++){
-              appendObject(i,"francis");
+              //fix new model genration
+              // appendObject(i,"francis");
             }
           }
 
@@ -192,7 +193,7 @@ function appendObject(id, file) {
 
   // https://stackoverflow.com/questions/41336889/adding-new-entities-on-the-fly-in-aframe
   let x = getRandomArbitrary(40,50);
-  let y = -3;
+  let y = 10;
   let z = getRandomArbitrary(40,50);
   const position = `${x} ${y} ${z}`;
 
@@ -211,15 +212,15 @@ function appendObject(id, file) {
  document.getElementById(id).setAttribute("position", position); // this does set position as a workaround
 }
 
-function removeObject(id){
-  try{
-    const shadow = document.querySelector("#object" + id.toString());
-    shadow.parentNode.removeChild(shadow);
-  }catch(e){
-    console.log("Error when finding model"+ e)
-  }
+// function removeObject(id){
+//   try{
+//     const shadow = document.querySelector("#object" + id.toString());
+//     shadow.parentNode.removeChild(shadow);
+//   }catch(e){
+//     console.log("Error when finding model"+ e)
+//   }
 
-}
+// }
 
 
 
