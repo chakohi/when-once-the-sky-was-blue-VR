@@ -35,15 +35,17 @@ var userCount = 0;
 io.sockets.on('connection', function (socket) {
   console.log('new connection: ' + socket.id);
   userCount++;
-  console.log('User Count: ',userCount)
-  socket.emit('usersConnected', userCount);
+
+  socket.on('usersConnected',() =>{
+    socket.emit("clientreceiveusersconnected",(userCount));
+  })
+
   socket.on('disconnect',function(){
     console.log(' the following user just left :( ->' + socket.id);
     userCount--;
     console.log('User Count: ',userCount)
     //update the user count for all users on every disconnect event;
-    socket.emit('usersConnected', userCount);
-  
+    socket.emit('clientreceiveusersconnected', userCount);
   })
   
 

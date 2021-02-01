@@ -144,7 +144,7 @@ AFRAME.registerComponent("foo", {
 /*Socket IO side */
 var socket = io.connect();
 
-var numUsers = 1;
+var numUsers = 0;
 
 var requestAnimationFrame = window.requestAnimationFrame       ||
                             window.webkitRequestAnimationFrame ||
@@ -158,14 +158,83 @@ const socket_loop = () => {
     setTimeout(function(){
         requestAnimationFrame(socket_loop)
         console.log("Num of users connected ",numUsers);
-        socket.on('usersConnected', function(data){
+        socket.emit('usersConnected')
+        socket.on("clientreceiveusersconnected",(data)=>{
+
+          // remove existing shadows = 
+          if (numUsers>0){
+            for (var i=0;i<numUsers;i++){
+              // removeObject(i)
+            }
+          }
+
+
           numUsers = data;
-        });
+          // create new shadows = 
+          if (numUsers>0){
+            for (var i=0;i<numUsers;i++){
+              //fix new model genration
+              // appendObject(i,"francis");
+            }
+          }
+
+        })
+
     },1000 / fps)
     
   }
 
 socket_loop();
+
+
+
+
+function appendObject(id, file) {
+
+  // https://stackoverflow.com/questions/41336889/adding-new-entities-on-the-fly-in-aframe
+  let x = getRandomArbitrary(40,50);
+  let y = 10;
+  let z = getRandomArbitrary(40,50);
+  const position = `${x} ${y} ${z}`;
+
+
+  $('<a-obj-model />', {
+    id: id,
+    class: 'city object children',
+    position: position,  // doesn't seem to do anything, known issue
+    scale: "0.5 0.5 0.5",
+    rotation: "0 0 0",
+    file: file,
+    src: '#' + file + '-obj',
+    mtl: '#' + file + '-mtl',
+    appendTo : $('#lobby')
+  });
+ document.getElementById(id).setAttribute("position", position); // this does set position as a workaround
+}
+
+// function removeObject(id){
+//   try{
+//     const shadow = document.querySelector("#object" + id.toString());
+//     shadow.parentNode.removeChild(shadow);
+//   }catch(e){
+//     console.log("Error when finding model"+ e)
+//   }
+
+// }
+
+
+
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+
+
+
+
+
+
+
 
 /*Change color
 of Francis to make it look like a shadow
@@ -173,67 +242,36 @@ of Francis to make it look like a shadow
 From : https://gist.github.com/Strae/8b62ee637699b4218b53b3f158351864
  */
 
-AFRAME.registerComponent('model-opacity', {
-  schema: {default: 1.0},
-  init: function () {
-    this.el.addEventListener('model-loaded', this.update.bind(this));
-  },
-  update: function () {
-    var mesh = this.el.getObject3D('mesh');
-    var data = this.data;
-    console.log(data)
-    console.log('sisis')
-    if (!mesh) { return; }
-    mesh.traverse(function (node) {
-      if (node.isMesh) {
-        console.log('hii')
-        node.material.opacity = data;
-        node.material.transparent = data < 1.0;
-        node.material.needsUpdate = true;
-      }
-    });
-  }
-});
 
 
-AFRAME.registerComponent("shadows", {
-  init: function() {
-  //console.log('shape-man');
+// AFRAME.registerComponent("shadows", {
+//   init: function() {
+//   //console.log('shape-man');
+//   console.log('make shadows!!!1')
+//   let sceneEl = document.querySelector('a-scene');
+//   this.shadows = [];
+//   for (var i =0;i<numUsers;i++){
+//     this.shadows[i] = document.createElement('a-entity');
+//     let x = getRandomArbitrary(0,6);
+//     let y = getRandomArbitrary(0,6);
+//     let z = -3;
 
-  console.log("Create shadows")
-  },
-  tick: function() {
-    let sceneEl = document.querySelector('a-scene');
-    this.shadows = [];
-    for (var i =0;i<numUsers;i++){
-      this.shadows[i] = document.createElement('a-entity');
-      let x = getRandomArbitrary(0,6);
-      let y = getRandomArbitrary(0,6);
-      let z = -3;
-      document.getElementById('shadows').append(
-      `<a-entity
-        id="shadow_francis_${numUsers}"
-        obj-model="obj: #francis-obj; mtl: #francis-mtl"
-        position="${x} ${y} ${z}"
-        scale="0.704 0.704 0.704"
-        model-opacity="0.5"
-      >
-          <a-animation attribute="model-opacity"
-          dur="10000"
-          from="1"
-          to="0"
-          repeat="indefinite"></a-animation>
-    
-    
-      </a-entity>`
-      )
-
-    }
-  }
-});
+//     this.shadows[i].setAttribute('class', 'shadow');
+//     this.shadows[i].setAttribute('geometry', {
+//       primitive: 'box',
+//       height: 5,
+//       width: 5,
+//       depth: 5
+//     });
+//     this.shadows[i].setAttribute('position', x.toString()+ ' '+y.toString()+' '+z.toString());
+//     this.shadows[i].setAttribute('color','	#FFFFFF');
 
 
+//   }
 
-function getRandomArbitrary(min, max) {
-  return Math.random() * (max - min) + min;
-}
+//   console.log("Create shadows")
+//   },
+//   tick: function() {
+
+//   }
+// });
