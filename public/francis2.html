@@ -4,12 +4,9 @@
     <script src="https://unpkg.com/aframe-particle-system-component@1.1.3/dist/aframe-particle-system-component.min.js"></script>
     <script src="https://unpkg.com/aframe-tangram-terrain-component/dist/aframe-tangram-terrain-component.min.js"></script>
     <script src="https://unpkg.com/aframe-aabb-collider-component@3.1.0/dist/aframe-aabb-collider-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-lensflare-component/dist/aframe-lensflare-component.min.js"></script>
     <script src="https://unpkg.com/aframe-proxy-event-component/dist/aframe-proxy-event-component.min.js"></script>
     <link rel="stylesheet" href="static/opening.css" />
   </head>
-
-  <!-- Color for landscape scene 1: material="roughness: 1; normalMap: #map; normalScale: 10; color: #110611;" -->
 
   <body>
     <title>
@@ -88,20 +85,10 @@
           animation="property: color; dir: alternate; dur: 1800; delay: 50; loop: false; repeat: 1; from: #000000; to: #ffffff; autoplay: false"
         >
         </a-sky>
-        <!-- <a-entity
-          position="0 1 0"
-          camera
-          look-controls
-          wasd-controls
-          foo
-          id="lobbyCam"
-        > -->
-        <!-- <a-entity id="rig" position="0 1 0"> -->
         <a-entity position="-3.5 1 0">
           <a-entity mixin="cube red"> </a-entity>
         </a-entity>
         <a-entity position="0 1 0">
-          <!-- raycastscript put in a-box. -->
           <a-entity camera foo look-controls wasd-controls id="lobbyCam">
             <a-entity
               id="cursorReticle"
@@ -116,40 +103,7 @@
             >
             </a-entity>
           </a-entity>
-
-          <!-- <a-entity
-            cursor="fuse: false"
-            position="0 0 -1"
-            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-            material="color: black; shader: flat"
-          ></a-entity> -->
-          <a-box
-            position="0 1 2"
-            rotation="0 90 35"
-            scale="0.4 0.4 0.4"
-            id="raycastCube"
-            aabb-collider="objects: a-entity"
-            raycastscript
-          ></a-box>
         </a-entity>
-
-        <!-- <a-sphere
-            id="flare"
-            radius="0.2"
-            color="white"
-            lensflare="createLight:true; lightType: point; intensity: 70; src: #flare; target: #lobbyCam; lightColor:white"
-            position="0 2 -4"
-          ></a-sphere> -->
-        <!-- </a-entity> -->
-        <!-- <a-light
-          type="directional"
-          intensity="0"
-          color="white"
-          position="-1 1 0"
-          animation="property: intensity; dur: 2000;
-          from: 0; to: 6;
-          loop: false; dir: alternate; autoplay: true"
-        ></a-light> -->
         <a-entity
           light="color: #BBB; type: ambient"
           data-aframe-default-light=""
@@ -206,33 +160,6 @@
           animation__rotation="property: light.intensity; from:0; to: 6; loop: 1; dur: 2000; delay:100; dir: alternate; startEvents: click;"
         >
         </a-entity>
-        <a-torus
-          id="francis1Torus"
-          color="white"
-          emissive="white"
-          arc="1"
-          position="-4.243 1.220 -2.366"
-          rotation="0 39 0"
-          segments-radial="50"
-          segments-tubular="200"
-          radius="0.5"
-          radius-tubular="0.03"
-          visible="false"
-        ></a-torus>
-        <!-- <a-entity position="0 1 0">
-          <a-entity mixin="cube toruss" geometry="arc: 5">
-            <a-animation
-              begin="click"
-              attribute="geometry.arc"
-              from="5"
-              to="360"
-              easing="linear"
-              dur="2000"
-              fill="backwards"
-            ></a-animation>
-          </a-entity>
-        </a-entity> -->
-
         <a-light
           type="point"
           intensity="1"
@@ -257,19 +184,6 @@
    loop: false; reapeat: 3; dir: alternate; autoplay: false"
         >
         </a-light>
-        <a-torus
-          id="francis2Torus"
-          color="white"
-          emissive="white"
-          arc="1"
-          position="0 1.220 -6.11"
-          rotation="0 0 0"
-          segments-radial="50"
-          segments-tubular="200"
-          radius="0.5"
-          radius-tubular="0.03"
-          visible="false"
-        ></a-torus>
         <a-entity
           francis2mouseenter
           id="francis2"
@@ -290,30 +204,6 @@
           light="type: hemisphere; color: white; intensity: 0;"
           animation__rotation="property: light.intensity; from:0; to: 6; loop: 1; dur: 2000; delay:100; dir: alternate; startEvents: click;"
         ></a-entity>
-        <!-- <a-light
-          type="point"
-          intensity="1"
-          id="francis3Light"
-          color="white"
-          distance="3.6"
-          position="4.748 1.5 -3"
-          animation="property: intensity; dur: 4000;
-      from: 6; to: 0.2;
-      loop: false; reapeat: 3; dir: alternate; autoplay: true"
-        >
-        </a-light>
-        <a-light
-          type="point"
-          intensity="1"
-          id="francis3LightTwo"
-          color="white"
-          distance="3.6"
-          position="4.748 1.5 -3"
-          animation="property: intensity; dur: 4000;
-   from: 0.6; to: 6;
-   loop: false; reapeat: 3; dir: alternate; autoplay: false"
-        >
-        </a-light> -->
       </a-entity>
       <a-entity shaperain id="firstPerformance" visible="false">
         <a-sky
@@ -341,27 +231,6 @@
           from:0; to: 1;
           loop: false; dir: alternate; autoplay: false"
         ></a-entity>
-        <!-- <a-entity
-          id="terrain"
-          visible="true"
-          geometry="primitive: plane; buffer: true;
-width: 1100; height: 1100; 
-segmentsWidth: 30; segmentsHeight: 1; "
-          material="wireframe: false; displacementScale: 10; color:#676667; roughness: 1;"
-          rotation="-90 0 0"
-          position="0 0 0"
-        >
-        </a-entity>
-        <a-entity
-          geometry="primitive: plane; width: 900; height: 900; segmentsHeight: 20; segmentsWidth: 20;"
-          rotation="-90 0 0"
-          position="0 -100 0"
-          material=" displacementMap: #map; displacementScale: 200;roughness: 1; normalMap: #map; normalScale: 10; color: #474747;"
-        ></a-entity> -->
-        <!-- <a-camera         id="cameraOne"
-      foo wasd-controls="enabled: false" position="0 1 0">
-        <a-cursor color="#FFFFFF" />
-      </a-camera> -->
       </a-entity>
 
       <a-entity id="secondPerformance" visible="false">
@@ -376,10 +245,6 @@ segmentsWidth: 30; segmentsHeight: 1; "
           position="0 2.25 -15"
           particle-system="preset: dust"
         ></a-entity>
-
-        <!-- <a-camera id="cameraTwo" wasd-controls="enabled: false" foo position="0 1 0">
-        <a-cursor color="#FFFFFF" />
-      </a-camera> -->
         <a-entity
           id="particles"
           position="0 5 -15"
@@ -408,14 +273,6 @@ segmentsWidth: 30; segmentsHeight: 1; "
           position="0 0 0"
           material="color: #ffffff"
         ></a-entity>
-        <!-- <a-camera
-        id="cameraThree"
-        wasd-controls="enabled: false"
-        foo
-        position="0 1 0"
-      >
-        <a-cursor color="#FFFFFF" />
-      </a-camera> -->
       </a-entity>
     </a-scene>
     <script src="js/francis2.js"></script>
