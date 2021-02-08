@@ -110,3 +110,7 @@ button:hover {
   font-size: 30px;
   animation: 0.8s ease-out 0s 1 slideInFromLeft;
 }
+
+#audio_error_text{
+  display: none;
+}
