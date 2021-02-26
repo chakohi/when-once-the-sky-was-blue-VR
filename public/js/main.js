@@ -199,22 +199,24 @@ const socket_loop = () => {
         socket.emit('usersConnected')
         socket.on("clientreceiveusersconnected",(data)=>{
 
-          // remove existing shadows = 
-          if (numUsers>0){
-            for (var i=0;i<numUsers;i++){
-              // removeObject(i)
-            }
-          }
-
-
-          numUsers = data;
+          // // remove existing shadows = 
+          // if (numUsers>0){
+          //   for (var i=0;i<numUsers;i++){
+          //     // removeObject(i)
+          //   }
+          // }
           // create new shadows = 
-          if (numUsers>0){
+          if (numUsers >0 && data!= numUsers){
+            console.log("new shadooow");
             for (var i=0;i<numUsers;i++){
               //fix new model genration
-              // appendObject(i,"francis");
+              console.log("new shadooow");
+
+              appendObject(i);
             }
           }
+
+          numUsers = data;
 
         })
 
@@ -227,89 +229,29 @@ socket_loop();
 
 
 
-function appendObject(id, file) {
+function appendObject(id) {
 
   // https://stackoverflow.com/questions/41336889/adding-new-entities-on-the-fly-in-aframe
   let x = getRandomArbitrary(40,50);
   let y = 10;
   let z = getRandomArbitrary(40,50);
-  const position = `${x} ${y} ${z}`;
+  // const position = `${x} ${y} ${z}`;
+  const position = `${0+id} ${0} ${0}`;
 
 
-  $('<a-obj-model />', {
+  $('<a-plane/>', {
     id: id,
-    class: 'city object children',
+    class: 'shadowsss',
     position: position,  // doesn't seem to do anything, known issue
     scale: "0.5 0.5 0.5",
     rotation: "0 0 0",
-    file: file,
-    src: '#' + file + '-obj',
-    mtl: '#' + file + '-mtl',
+    material:"src: https://cdn.glitch.com/3e0647c5-426f-481a-af3a-7e4ea083f89d%2F35363-6-finn-transparent.png?1557253724951; transparent: true",
     appendTo : $('#lobby')
   });
  document.getElementById(id).setAttribute("position", position); // this does set position as a workaround
 }
 
-// function removeObject(id){
-//   try{
-//     const shadow = document.querySelector("#object" + id.toString());
-//     shadow.parentNode.removeChild(shadow);
-//   }catch(e){
-//     console.log("Error when finding model"+ e)
-//   }
-
-// }
-
-
 
 function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;
 }
-
-
-
-
-
-
-
-
-
-/*Change color
-of Francis to make it look like a shadow
-
-From : https://gist.github.com/Strae/8b62ee637699b4218b53b3f158351864
- */
-
-
-
-// AFRAME.registerComponent("shadows", {
-//   init: function() {
-//   //console.log('shape-man');
-//   console.log('make shadows!!!1')
-//   let sceneEl = document.querySelector('a-scene');
-//   this.shadows = [];
-//   for (var i =0;i<numUsers;i++){
-//     this.shadows[i] = document.createElement('a-entity');
-//     let x = getRandomArbitrary(0,6);
-//     let y = getRandomArbitrary(0,6);
-//     let z = -3;
-
-//     this.shadows[i].setAttribute('class', 'shadow');
-//     this.shadows[i].setAttribute('geometry', {
-//       primitive: 'box',
-//       height: 5,
-//       width: 5,
-//       depth: 5
-//     });
-//     this.shadows[i].setAttribute('position', x.toString()+ ' '+y.toString()+' '+z.toString());
-//     this.shadows[i].setAttribute('color','	#FFFFFF');
-
-
-//   }
-
-//   console.log("Create shadows")
-//   },
-//   tick: function() {
-
-//   }
-// });
