@@ -242,7 +242,7 @@ function appendObject(id) {
     position: position,  // doesn't seem to do anything, known issue
     scale: "0.5 0.5 0.5",
     rotation: "0 0 0",
-    material:"src: https://cdn.glitch.com/3e0647c5-426f-481a-af3a-7e4ea083f89d%2F35363-6-finn-transparent.png?1557253724951; transparent: true",
+    material:"src: #shadow; transparent: true",
     appendTo : $('#lobby')
   });
  document.getElementById(`shadow${id}`).setAttribute("position", position); // this does set position as a workaround
