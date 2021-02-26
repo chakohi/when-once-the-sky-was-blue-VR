@@ -233,14 +233,14 @@ function appendObject(id) {
   let y = 10;
   let z = getRandomArbitrary(40,50);
   // const position = `${x} ${y} ${z}`;
-  const position = `${0+id} ${0} ${0}`;
+  const position = `${getRandomArbitrary(-5,5)} ${1} ${getRandomArbitrary(-7,-9)}`;
 
 
   $('<a-plane/>', {
     id: `shadow${id}`,
     class: 'shadowsss',
     position: position,  // doesn't seem to do anything, known issue
-    scale: "0.5 0.5 0.5",
+    scale: "5 5 5",
     rotation: "0 0 0",
     material:"src: #shadow; transparent: true",
     appendTo : $('#lobby')
