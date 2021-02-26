@@ -183,6 +183,7 @@ AFRAME.registerComponent("foo", {
 var socket = io.connect();
 
 var numUsers = 0;
+var previousNumUsers = 0;
 
 var requestAnimationFrame = window.requestAnimationFrame       ||
                             window.webkitRequestAnimationFrame ||
@@ -194,31 +195,27 @@ var fps = 60; //frames per second to determine how many frames I want per second
 const socket_loop = () => {
     //use set timeout function to slowdown animation frame.
     setTimeout(function(){
-        requestAnimationFrame(socket_loop)
-        console.log("Num of users connected ",numUsers);
-        socket.emit('usersConnected')
+        requestAnimationFrame(socket_loop);
         socket.on("clientreceiveusersconnected",(data)=>{
-
-          // // remove existing shadows = 
-          // if (numUsers>0){
-          //   for (var i=0;i<numUsers;i++){
-          //     // removeObject(i)
-          //   }
-          // }
-          // create new shadows = 
-          if (numUsers >0 && data!= numUsers){
-            console.log("new shadooow");
-            for (var i=0;i<numUsers;i++){
-              //fix new model genration
-              console.log("new shadooow");
-
-              appendObject(i);
-            }
-          }
-
           numUsers = data;
-
         })
+        console.log("Num of users connected ",numUsers);
+        console.log("PreviousNum of users connected ",numUsers);
+        if (numUsers >0 && previousNumUsers<numUsers){
+          console.log("new shadooow");
+          for (var i=0;i<numUsers;i++){
+            //fix new model genration
+            console.log("new shadooow");
+
+            appendObject(i);
+          }
+        }
+        else if(numUsers<previousNumUsers){
+          console.log("removeee")
+          removeObject(previousNumUsers)
+        }
+        socket.emit('usersConnected');
+        previousNumUsers = numUsers;
 
     },1000 / fps)
     
@@ -240,7 +237,7 @@ function appendObject(id) {
 
 
   $('<a-plane/>', {
-    id: id,
+    id: `shadow${id}`,
     class: 'shadowsss',
     position: position,  // doesn't seem to do anything, known issue
     scale: "0.5 0.5 0.5",
@@ -248,7 +245,12 @@ function appendObject(id) {
     material:"src: https://cdn.glitch.com/3e0647c5-426f-481a-af3a-7e4ea083f89d%2F35363-6-finn-transparent.png?1557253724951; transparent: true",
     appendTo : $('#lobby')
   });
- document.getElementById(id).setAttribute("position", position); // this does set position as a workaround
+ document.getElementById(`shadow${id}`).setAttribute("position", position); // this does set position as a workaround
+}
+
+function removeObject(objectCount){
+    previousObject = document.getElementById(`shadow${objectCount - 1}`);
+    previousObject.parentNode.removeChild(previousObject);
 }
 
 
