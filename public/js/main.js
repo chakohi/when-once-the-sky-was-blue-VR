@@ -279,11 +279,13 @@ AFRAME.registerComponent("shaperain", {
     });
     x = (size + spacing) * countX * (-0.5) + i * (size + spacing) ;
     y = Math.random() * 0.9 + 1.5;
-    const position = `${x} ${y} ${0}`;
+    z = getRandomArbitrary(-5,5);
+    const position = `${x} ${y} ${z}`;
     const position_dictionary = {
       x:x,
       y:y,
-      z:0
+      z:z, 
+      z_initial:z
     }
     console.log("intended pos of shape",position);
     shapes[i].setAttribute("position",position);
@@ -326,15 +328,15 @@ AFRAME.registerComponent("shaperain", {
 
       }
       roundtripcounter+=1;
+      xPos = shapepositions[shape_id]['x'];
+      yPos = shapepositions[shape_id]['y'];
+      zPos = shapepositions[shape_id]['z']+=0.03;
 
-      let xPos = shapepositions[shape_id]['x'];
-      let yPos = shapepositions[shape_id]['y'];
-      let zPos = shapePos['z'] + 0.01;
-      
       if (zPos > 9){
-        zPos = -1; 
+        shapepositions[shape_id]['z'] = shapepositions[shape_id]['z_initial'];
         shape.setAttribute('color',getRandomColor())
       }
+      
       shape.setAttribute('position',xPos.toString()+ ' '+yPos.toString() +' '+ zPos.toString())
     })
     
