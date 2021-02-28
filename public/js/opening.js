@@ -1,5 +1,3 @@
-// console.log("opening title");
-
 $(document).ready(function() {
   document.getElementById('player').play().catch((error)=>{
     //remove normal text 
@@ -10,7 +8,8 @@ $(document).ready(function() {
   });
   
   //3 seconds transition time
-  var transitiontime = 6500;
+  // var transitiontime = 6500;
+  var transitiontime = 1000;
   //first text container
   $("#text1").fadeIn(4500);
   setTimeout(function() {
