@@ -8,7 +8,9 @@ $(document).ready(function() {
   });
   
   //3 seconds transition time
+  // prod time below
   // var transitiontime = 6500;
+  //dev time below so that it is quicker for testing
   var transitiontime = 1000;
   //first text container
   $("#text1").fadeIn(4500);
