@@ -243,7 +243,11 @@ function appendObject(id) {
 }
 
 function removeObject(objectCount){
-    previousObject = document.getElementById(`shadow${objectCount - 1}`);
+     let id = objectCount - 1;
+     if (id<0){
+       id = 0
+     }
+    previousObject = document.getElementById(`shadow${id}`);
     previousObject.parentNode.removeChild(previousObject);
 }
 
@@ -330,7 +334,7 @@ AFRAME.registerComponent("shaperain", {
       roundtripcounter+=1;
       xPos = shapepositions[shape_id]['x'];
       yPos = shapepositions[shape_id]['y'];
-      zPos = shapepositions[shape_id]['z']+=0.03;
+      zPos = shapepositions[shape_id]['z']+=0.01;
 
       if (zPos > 9){
         shapepositions[shape_id]['z'] = shapepositions[shape_id]['z_initial'];
