@@ -1,4 +1,3 @@
-
 let skyElementSecond;
 let skyElementFirst;
 let lobbySkyTransition, lobbySkyTransitionTwo, lobbySkyTransitionThree;
@@ -19,8 +18,16 @@ let francis1;
 let currHoverFrancis;
 let scene1El;
 let cursorReticle;
+
+var scene = document.querySelector("a-scene");
+scene.addEventListener("loaded", function() {
+  // scene.pause();
+});
+// document.getElementById("waitOnMe").emit("loaded");
+
 AFRAME.registerComponent("foo", {
   init: function() {
+    scene.pause();
     francis1 = document.querySelector("#francis1");
     this.plane = document.querySelector("#planeToFollow");
     this.cam = document.querySelector("#lobbyCam");
@@ -43,7 +50,7 @@ AFRAME.registerComponent("foo", {
     skyElementSecond = document.querySelector("#scene2Sky");
     skyElementFirst = document.querySelector("#scene1Sky");
     this.plane = document.querySelector("#planeToFollow");
-
+    lobbyEl.pause();
     scene1El.setAttribute("visible", "false");
     scene2El.setAttribute("visible", "false");
     scene3El.setAttribute("visible", "false");
@@ -58,9 +65,14 @@ AFRAME.registerComponent("foo", {
       ) {
         lobbySkyTransition.setAttribute("visible", "true");
         lobbySkyTransition.setAttribute("animation", "autoplay", true);
+        // $("#panelToFadeBetweenScenes").css("z-index", 15);
+        $("#panelToFadeBetweenScenes").fadeIn(1900);
+        setTimeout(function() {
+          $("#panelToFadeBetweenScenes").fadeOut(1900);
+        }, 2000);
         if (
           document.querySelector("#francis1").components.light.light.intensity >
-          5.2
+          7.5
         ) {
           state = 3;
           lobbyEl.setAttribute("visible", "false");
@@ -68,6 +80,27 @@ AFRAME.registerComponent("foo", {
           floorToFadeScene1.setAttribute("animation", "autoplay", true);
           skyElementFirst.setAttribute("animation", "autoplay", true);
           lobbySkyTransition.setAttribute("material", "color", "rgb(0, 0, 0)");
+          //first text container
+          setTimeout(function() {
+            $("#breatheIn").fadeIn(4500);
+          }, 2000);
+          setTimeout(function() {
+            $("#breatheIn").fadeOut(1900);
+          }, 5000);
+          setTimeout(function() {
+            $("#breatheOut").fadeIn(4500);
+          }, 9000);
+          setTimeout(function() {
+            $("#breatheOut").fadeOut(3000);
+          }, 12000);
+          // setTimeout(function() {
+          //   $("#textcontainer4").fadeIn(4500);
+          //   $("#textcontainer3").remove();
+          //   setTimeout(function() {
+          //     $("#textcontainer4").fadeOut(1900);
+          //     $("#textcontainer5").fadeIn(4500);
+          //   }, transitiontime);
+          // }, 2000);
           //moving boxes can be triggered here
         }
       }
@@ -80,7 +113,7 @@ AFRAME.registerComponent("foo", {
         lobbySkyTransitionTwo.setAttribute("animation", "autoplay", true);
         if (
           document.querySelector("#francis2").components.light.light.intensity >
-          5.2
+          7.5
         ) {
           state = 2;
           lobbyEl.setAttribute("visible", "false");
@@ -90,6 +123,16 @@ AFRAME.registerComponent("foo", {
 
           skyElementSecond.setAttribute("animation", "autoplay", true);
           francisTorus2Increment = 0;
+          $("#breatheIn").fadeIn(4500);
+          setTimeout(function() {
+            $("#breatheIn").fadeOut(1900);
+          }, 3000);
+          setTimeout(function() {
+            $("#breatheOut").fadeIn(4500);
+          }, 6000);
+          setTimeout(function() {
+            $("#breatheOut").fadeOut(3000);
+          }, 9000);
         }
       }
       if (
@@ -101,7 +144,7 @@ AFRAME.registerComponent("foo", {
         lobbySkyTransitionThree.setAttribute("animation", "autoplay", true);
         if (
           document.querySelector("#francis3").components.light.light.intensity >
-          5.2
+          7.5
         ) {
           state = 4;
           lobbySkyTransition.setAttribute("visible", "true");
@@ -142,6 +185,7 @@ AFRAME.registerComponent("foo", {
     if (state == 3) {
       if (skyElementFirst.components.material.material.color.g < 0.37) {
         state = 0;
+
         currHoverFrancis = null;
         scene1El.setAttribute("visible", false);
         lobbyEl.setAttribute("visible", true);
@@ -178,138 +222,68 @@ AFRAME.registerComponent("foo", {
   }
 });
 
-
 /*Socket IO side */
 var socket = io.connect();
 
 var numUsers = 0;
 
-var requestAnimationFrame = window.requestAnimationFrame       ||
-                            window.webkitRequestAnimationFrame ||
-                            window.mozRequestAnimationFrame    ||
-                            window.msRequestAnimationFrame; 
+var requestAnimationFrame =
+  window.requestAnimationFrame ||
+  window.webkitRequestAnimationFrame ||
+  window.mozRequestAnimationFrame ||
+  window.msRequestAnimationFrame;
 var time = 0;
-var fps = 60; //frames per second to determine how many frames I want per second   
+var fps = 60; //frames per second to determine how many frames I want per second
 
 const socket_loop = () => {
-    //use set timeout function to slowdown animation frame.
-    setTimeout(function(){
-        requestAnimationFrame(socket_loop)
-        console.log("Num of users connected ",numUsers);
-        socket.emit('usersConnected')
-        socket.on("clientreceiveusersconnected",(data)=>{
+  //use set timeout function to slowdown animation frame.
+  setTimeout(function() {
+    requestAnimationFrame(socket_loop);
+    console.log("Num of users connected ", numUsers);
+    socket.emit("usersConnected");
+    socket.on("clientreceiveusersconnected", data => {
+      // remove existing shadows =
+      if (numUsers > 0) {
+        for (var i = 0; i < numUsers; i++) {
+          // removeObject(i)
+        }
+      }
 
-          // remove existing shadows = 
-          if (numUsers>0){
-            for (var i=0;i<numUsers;i++){
-              // removeObject(i)
-            }
-          }
-
-
-          numUsers = data;
-          // create new shadows = 
-          if (numUsers>0){
-            for (var i=0;i<numUsers;i++){
-              //fix new model genration
-              // appendObject(i,"francis");
-            }
-          }
-
-        })
-
-    },1000 / fps)
-    
-  }
+      numUsers = data;
+      // create new shadows =
+      if (numUsers > 0) {
+        for (var i = 0; i < numUsers; i++) {
+          //fix new model genration
+          // appendObject(i,"francis");
+        }
+      }
+    });
+  }, 1000 / fps);
+};
 
 socket_loop();
 
-
-
-
 function appendObject(id, file) {
-
   // https://stackoverflow.com/questions/41336889/adding-new-entities-on-the-fly-in-aframe
-  let x = getRandomArbitrary(40,50);
+  let x = getRandomArbitrary(40, 50);
   let y = 10;
-  let z = getRandomArbitrary(40,50);
+  let z = getRandomArbitrary(40, 50);
   const position = `${x} ${y} ${z}`;
 
-
-  $('<a-obj-model />', {
+  $("<a-obj-model />", {
     id: id,
-    class: 'city object children',
-    position: position,  // doesn't seem to do anything, known issue
+    class: "city object children",
+    position: position, // doesn't seem to do anything, known issue
     scale: "0.5 0.5 0.5",
     rotation: "0 0 0",
     file: file,
-    src: '#' + file + '-obj',
-    mtl: '#' + file + '-mtl',
-    appendTo : $('#lobby')
+    src: "#" + file + "-obj",
+    mtl: "#" + file + "-mtl",
+    appendTo: $("#lobby")
   });
- document.getElementById(id).setAttribute("position", position); // this does set position as a workaround
+  document.getElementById(id).setAttribute("position", position); // this does set position as a workaround
 }
-
-// function removeObject(id){
-//   try{
-//     const shadow = document.querySelector("#object" + id.toString());
-//     shadow.parentNode.removeChild(shadow);
-//   }catch(e){
-//     console.log("Error when finding model"+ e)
-//   }
-
-// }
-
-
-
 function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-
-
-
-
-
-
-
-
-/*Change color
-of Francis to make it look like a shadow
-
-From : https://gist.github.com/Strae/8b62ee637699b4218b53b3f158351864
- */
-
-
-
-// AFRAME.registerComponent("shadows", {
-//   init: function() {
-//   //console.log('shape-man');
-//   console.log('make shadows!!!1')
-//   let sceneEl = document.querySelector('a-scene');
-//   this.shadows = [];
-//   for (var i =0;i<numUsers;i++){
-//     this.shadows[i] = document.createElement('a-entity');
-//     let x = getRandomArbitrary(0,6);
-//     let y = getRandomArbitrary(0,6);
-//     let z = -3;
-
-//     this.shadows[i].setAttribute('class', 'shadow');
-//     this.shadows[i].setAttribute('geometry', {
-//       primitive: 'box',
-//       height: 5,
-//       width: 5,
-//       depth: 5
-//     });
-//     this.shadows[i].setAttribute('position', x.toString()+ ' '+y.toString()+' '+z.toString());
-//     this.shadows[i].setAttribute('color','	#FFFFFF');
-
-
-//   }
-
-//   console.log("Create shadows")
-//   },
-//   tick: function() {
-
-//   }
-// });

@@ -1,40 +1,45 @@
-console.log("opening title");
+// console.log("opening title");
 
 $(document).ready(function() {
   document.getElementById('player').play().catch((error)=>{
     //remove normal text 
     document.getElementById("opening_text").style.display = "none";
-
     //display error text 
     document.getElementById("audio_error_text").style.display = "block";
 
   });
   
   //3 seconds transition time
-  var transitiontime = 5000;
+  var transitiontime = 6500;
   //first text container
-  $("#text1").fadeIn(2200);
+  $("#text1").fadeIn(4500);
   setTimeout(function() {
-    $("#text2").fadeIn(2200);
+    $("#text2").fadeIn(4000);
     //second textcontainer
     setTimeout(function() {
-      $("#textcontainer1").remove();
-      $("#textcontainer2").fadeIn(2200);
-
+      $("#textcontainer1").fadeOut(1900);
       setTimeout(function() {
-        $("#textcontainer2").remove();
-        $("#textcontainer3").fadeIn(2200);
-
+        $("#textcontainer2").fadeIn(4500);
+        $("#textcontainer1").remove();
         setTimeout(function() {
-          $("#textcontainer3").remove();
-          $("#textcontainer4").fadeIn(2200);
-
+          $("#textcontainer2").fadeOut(1900);
           setTimeout(function() {
-            $("#textcontainer4").remove();
-            $("#textcontainer5").fadeIn(2200);
-          }, transitiontime);
+            $("#textcontainer3").fadeIn(4500);
+            $("#textcontainer2").remove();
+            setTimeout(function() {
+              $("#textcontainer3").fadeOut(1900);
+              setTimeout(function() {
+                $("#textcontainer4").fadeIn(4500);
+                $("#textcontainer3").remove();
+                setTimeout(function() {
+                  $("#textcontainer4").fadeOut(1900);
+                  $("#textcontainer5").fadeIn(4500);
+                }, transitiontime);
+              }, 2000);
+            }, transitiontime);
+          }, 2000);
         }, transitiontime);
-      }, transitiontime);
+      }, 2000);
     }, transitiontime);
   }, transitiontime);
 });
@@ -42,6 +47,7 @@ $(document).ready(function() {
 function reload() {
   window.location.reload(false);
 }
+var scene = document.querySelector("a-scene");
 var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
 if (!isChrome){
     $('#iframeAudio').remove()
@@ -50,8 +56,28 @@ else {
     $('#playAudio').remove() // just to make sure that it will not have 2x audio in the background 
 }
 
+var socket = io().connect();
 
+var fadeInScreen = document.getElementById("fullscreenFadeIn");
+const sceneButton = document.querySelector("#toScene");
 
+sceneButton.addEventListener("click", () => {
+  fadeInScreen.style.zIndex = 10;
+  sceneButton.style.zIndex = 1;
+  fadeInScreen.classList.toggle("fadeInWhite");
+  // var timeoutID = setTimeout(timeout(), 3000);
+  setTimeout(function() {
+    timeout();
+  }, 4000);
+});
 
-
-var socket = io().connect()
+function timeout() {
+  console.log("it's done");
+  // window.location.href = "http://localhost:3000/performance";
+  //             $("#textcontainer4").remove();
+  document.querySelector("#waitOnMe").remove();
+  scene.play();
+  setTimeout(function() {
+    document.querySelector("#openingTitle").remove();
+  }, 400);
+}
