@@ -72,6 +72,7 @@
     vr-mode-ui="enabled: false"
   > -->
       <a-assets>
+        <img id="shadow" crossorigin="anonymous" src="static/shadow.png">
         <a-asset-item id="francis-obj" src="static/cloak.obj"></a-asset-item>
         <a-asset-item id="francis-mtl" src="static/cloak.mtl"></a-asset-item>
         <img id="skymap" src="textures/sky2.png" crossorigin="anonymous" />
@@ -264,7 +265,7 @@
           animation__rotation="property: light.intensity; from:0; to: 8; loop: 1; dur: 2000; delay:100; dir: alternate; startEvents: click;"
         ></a-entity>
       </a-entity>
-      <a-entity shaperain id="firstPerformance" visible="false">
+      <a-entity id="firstPerformance" visible="false">
         <a-sky
           id="scene1Sky"
           geometry="primitive:sphere; radius:170; phiLength:360; phiStart:0; thetaLength:90"
@@ -334,8 +335,8 @@
         ></a-entity>
       </a-entity>
     </a-scene>
-
-    <script src="js/lib/socket.io.js"></script>
+    <script src="js/lib/jquery-3.5.1.js"></script>
+    <script src = "js/lib/socket.io.js"></script>
     <script src="js/main.js"></script>
     <script src="js/opening.js"></script>
   </body>
