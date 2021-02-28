@@ -12,10 +12,7 @@ var io = socket(server, {'transports': ['websocket', 'polling']});
 app.use(express.static(path.join(__dirname, "public/")));
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public/", "opening.html"));
-});
-app.get("/performance", (req, res) => {
-  res.sendFile(path.join(__dirname, "public/", "main.html"));
+  res.sendFile(path.join(__dirname, "public/", "index.html"));
 });
 
 
