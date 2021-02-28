@@ -11,8 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="static/opening.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="js/lib/socket.io.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <script src="js/lib/jquery-3.5.1.js"></script>
+    <script src='js/lib/socket.io.js'></script>
 
     <!-- font -->
     <link
@@ -62,6 +63,10 @@
       </div>
       <!-- <button><a href="/performance">Enter the world</a></button> -->
     </div>
+    <div id="audio_error_text" class="textcontainer">
+      <h1 id="text3">Your browser currently does not allow audio. Please change your audio permissions to enjoy this performance.</h1>
+    </div>
+
     <script src="js/opening.js"></script>
   </body>
 </html>

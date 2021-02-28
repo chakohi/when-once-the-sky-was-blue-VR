@@ -283,54 +283,7 @@ function appendObject(id, file) {
   });
   document.getElementById(id).setAttribute("position", position); // this does set position as a workaround
 }
-
-// function removeObject(id){
-//   try{
-//     const shadow = document.querySelector("#object" + id.toString());
-//     shadow.parentNode.removeChild(shadow);
-//   }catch(e){
-//     console.log("Error when finding model"+ e)
-//   }
-
-// }
-
 function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-/*Change color
-of Francis to make it look like a shadow
-
-From : https://gist.github.com/Strae/8b62ee637699b4218b53b3f158351864
- */
-
-// AFRAME.registerComponent("shadows", {
-//   init: function() {
-//   //console.log('shape-man');
-//   console.log('make shadows!!!1')
-//   let sceneEl = document.querySelector('a-scene');
-//   this.shadows = [];
-//   for (var i =0;i<numUsers;i++){
-//     this.shadows[i] = document.createElement('a-entity');
-//     let x = getRandomArbitrary(0,6);
-//     let y = getRandomArbitrary(0,6);
-//     let z = -3;
-
-//     this.shadows[i].setAttribute('class', 'shadow');
-//     this.shadows[i].setAttribute('geometry', {
-//       primitive: 'box',
-//       height: 5,
-//       width: 5,
-//       depth: 5
-//     });
-//     this.shadows[i].setAttribute('position', x.toString()+ ' '+y.toString()+' '+z.toString());
-//     this.shadows[i].setAttribute('color','	#FFFFFF');
-
-//   }
-
-//   console.log("Create shadows")
-//   },
-//   tick: function() {
-
-//   }
-// });

@@ -1,9 +1,14 @@
 // console.log("opening title");
 
 $(document).ready(function() {
-  $("#lobbyMusic")
-    .get(0)
-    .play();
+  document.getElementById('player').play().catch((error)=>{
+    //remove normal text 
+    document.getElementById("opening_text").style.display = "none";
+    //display error text 
+    document.getElementById("audio_error_text").style.display = "block";
+
+  });
+  
   //3 seconds transition time
   var transitiontime = 6500;
   //first text container
@@ -43,6 +48,13 @@ function reload() {
   window.location.reload(false);
 }
 var scene = document.querySelector("a-scene");
+var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+if (!isChrome){
+    $('#iframeAudio').remove()
+}
+else {
+    $('#playAudio').remove() // just to make sure that it will not have 2x audio in the background 
+}
 
 var socket = io().connect();
 

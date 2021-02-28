@@ -290,3 +290,7 @@ button:hover {
   z-index: 10;
   position: relative;
 }
+#audio_error_text{
+  font-family: Garamond;
+  display: none;
+}
