@@ -250,8 +250,8 @@ const socket_loop = () => {
       socket.on("clientreceiveusersconnected",(data)=>{
         numUsers = data;
       })
-      console.log("Num of users connected ",numUsers);
-      console.log("PreviousNum of users connected ",numUsers);
+      // console.log("Num of users connected ",numUsers);
+      // console.log("PreviousNum of users connected ",numUsers);
       if (numUsers >0 && previousNumUsers<numUsers){
         console.log("new shadooow");
         for (var i=0;i<numUsers;i++){
@@ -283,9 +283,10 @@ var center_z = 4;
 function appendObject(id) {
   // https://stackoverflow.com/questions/41336889/adding-new-entities-on-the-fly-in-aframe
 
-  
-  let x = radius*Math.cos(getRandomArbitrary(0,2*3.14)) + center_x ;
-  let z = radius*Math.sin(getRandomArbitrary(0,2*3.14)) + center_z ;
+  const random_angle = getRandomArbitrary(0,2*3.14);
+  const random_angle_in_degrees = (random_angle * 360)/(2*3.14)
+  let x = radius*Math.cos(random_angle) + center_x ;
+  let z = radius*Math.sin(random_angle) + center_z ;
   let y = 1;
   // imporve shadow randomization below
   const position = `${x} ${y} ${z}`;
@@ -297,11 +298,19 @@ function appendObject(id) {
     scale: "10 10 10",
     rotation: "0 0 0",
     material:"src: #shadow; transparent: true",
-    appendTo : $('#lobby')
+    appendTo : $('#lobby'), 
+    lookAt:"#lobbycam",
   });
- const shadow = document.getElementById(`shadow${id}`)
- shadow.setAttribute("position", position); // this does set position as a workaround
-//  shadow.entity3D.lookAt(new THREE.Vector3(center_x,1, center_z));
+ var shadow = document.getElementById(`shadow${id}`)
+ shadow.setAttribute("position", position); // this does set position as a workaround;
+
+ //rotate to look at center: https://stackoverflow.com/questions/62996415/how-to-use-look-at-feature-in-ar-js-programatically
+ shadow.setAttribute("look-at", "[camera]");
+ const object3D = shadow.object3D;
+ console.log("OBJECT 3D \N ",object3D);
+ object3D.lookAt(new THREE.Vector3(0, 1, -6));
+// console.log("oeifpeqpoqem[qefkq[eofqe[fofeq[ok")
+ console.log(shadow);
 }
 
 function removeObject(objectCount){
