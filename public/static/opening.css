@@ -22,23 +22,26 @@ h2 {
 }
 
 h1 {
-  font-size: 42px;
+  font-size: 39px;
   font-weight: bold;
 }
 
 h2 {
-  font-size: 35px;
+  font-size: 32px;
   font-weight: 300;
 }
 .textcontainer {
-  margin-top: 40vh;
+  margin-top: 20vh;
   height: 100%;
+  text-align: center;
 }
+
 .nodisplay {
   display: none;
 }
 #textcontainer1 {
   font-family: "Roboto", sans-serif;
+  margin-top: 40vh;
 }
 
 .roboticfont {
@@ -63,6 +66,29 @@ h2 {
   pointer-events: none;
 }
 
+#text3 {
+  /* text-align: center; */
+  width: 50%;
+  margin: auto;
+}
+
+#text4 {
+  /* text-align: center; */
+  width: 50%;
+  margin: auto;
+}
+
+#text5 {
+  /* text-align: center; */
+  width: 50%;
+  margin: auto;
+}
+
+#text6 {
+  /* text-align: center; */
+  width: 50%;
+  margin: auto;
+}
 button {
   background-color: rgb(68, 68, 68); /* Green */
   border: none;
@@ -214,8 +240,8 @@ button:hover {
 }
 
 #text5_image {
-  width: 180px;
-  height: auto;
+  /* width: 180px;
+  height: auto; */
   margin: 30px auto 30px auto;
 }
 /* #text1{
@@ -228,13 +254,13 @@ button:hover {
 
 #textcontainer3{
     display: none;
-}
-#textcontainer4{
-    display: none;
-}
-#textcontainer5{
-    display: none;
 } */
+#textcontainer4 {
+  margin-top: 10vh;
+}
+#textcontainer5 {
+  margin-top: 40vh;
+}
 
 /* #textcontainer2{
     height: 100px;
@@ -290,7 +316,7 @@ button:hover {
   z-index: 10;
   position: relative;
 }
-#audio_error_text{
+#audio_error_text {
   font-family: Garamond;
   display: none;
 }

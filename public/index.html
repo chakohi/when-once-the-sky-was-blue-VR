@@ -13,7 +13,7 @@
     <div id="openingTitle">
       <div id="fullscreenFadeIn"></div>
       <audio id="player" autoplay loop allow="autoplay">
-        <source src="sounds/lobbysound.mp3" type="audio/mp3">
+        <source src="sounds/lobbysound.mp3" type="audio/mp3" />
       </audio>
       <!-- <div id="audio_error_text" class="textcontainer">
         <h1 id="text3">Your browser currently does not allow audio. Please change your audio permissions and reload the page to enjoy this performance.</h1>
@@ -24,20 +24,22 @@
           <h2 class="nodisplay" id="text2">a virtual experience</h2>
         </div>
         <div class="textcontainer nodisplay roboticfont" id="textcontainer2">
-          <h1 id="text3">This performance is best experienced with headphones</h1>
-          <img id="text3_image" src="icons/headphones.png" />
+          <h1 id="text3">
+            This performance is best experienced with headphones
+          </h1>
+          <img id="text3_image" src="icons/headphoneJPGCropped.jpg" />
         </div>
         <div class="textcontainer nodisplay roboticfont" id="textcontainer3">
           <h1 id="text4">
             We recommend being in an isolated environment to avoid interruptions
           </h1>
-          <img id="text4_image" src="icons/cube3.png" />
+          <img id="text4_image" src="./icons/roomJPGCropped.jpg" />
         </div>
         <div class="textcontainer nodisplay roboticfont" id="textcontainer4">
           <h1 id="text5">
             This performance is best experienced in total darkness.
           </h1>
-          <img id="text5_image" src="icons/lightbulb3.png" />
+          <img id="text5_image" src="icons/lightbulbJPGCropped.jpg" />
           <h2 id="text6">
             Now it is the time to draw the curtains, switch off your lights, and
             move if necessary.
@@ -49,8 +51,7 @@
           </div>
         </div>
       </div>
-      </div>
-
+    </div>
 
     <div class="nodisplay" id="panelToFadeBetweenScenes"></div>
     <div class="textcontainer nodisplay roboticfont" id="breatheIn">
@@ -70,7 +71,7 @@
     vr-mode-ui="enabled: false"
   > -->
       <a-assets>
-        <img id="shadow" crossorigin="anonymous" src="static/shadow.png">
+        <img id="shadow" crossorigin="anonymous" src="static/shadow.png" />
         <a-asset-item id="francis-obj" src="static/cloak.obj"></a-asset-item>
         <a-asset-item id="francis-mtl" src="static/cloak.mtl"></a-asset-item>
         <img id="skymap" src="textures/sky2.png" crossorigin="anonymous" />
@@ -334,7 +335,7 @@
       </a-entity>
     </a-scene>
     <script src="js/lib/jquery-3.5.1.js"></script>
-    <script src = "js/lib/socket.io.js"></script>
+    <script src="js/lib/socket.io.js"></script>
     <script src="js/main.js"></script>
     <script src="js/opening.js"></script>
   </body>
