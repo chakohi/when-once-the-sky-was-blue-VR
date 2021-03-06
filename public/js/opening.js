@@ -1,11 +1,36 @@
 $(document).ready(function() {
-  document.getElementById('player').play().catch((error)=>{
-    //remove normal text 
-    document.getElementById("opening_text").style.display = "none";
-    //display error text 
-    document.getElementById("audio_error_text").style.display = "block";
+  // document.getElementById('player').play().catch((error)=>{
+  //   //remove normal text 
+  //   document.getElementById("opening_text").style.display = "none";
+  //   //display error text 
+  //   document.getElementById("audio_error_text").style.display = "block";
 
-  });
+  // });
+  navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
+  navigator.mozGetUserMedia ||
+  navigator.msGetUserMedia
+
+  if (navigator.getUserMedia) {
+    navigator.getUserMedia(
+      {  audio: true },
+      function onSuccess(stream) {
+          // go play
+          console.log("yaaaaay wohhooooo")
+          document.getElementById('player').play()
+
+      },
+      function onError(error) {
+        console.log("naaaaah why u mad at me")
+        
+      }
+    )
+  } else {
+    console.log("ver bad brwoser faaaam")
+    
+  }
+  // navigator.mediaDevices.getUserMedia({
+  //   audio: true
+  // })
   
   //3 seconds transition time
   // prod time below
