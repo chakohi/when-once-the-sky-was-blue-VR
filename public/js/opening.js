@@ -25,12 +25,9 @@ $(document).ready(function() {
       }
     )
   } else {
-    console.log("ver bad brwoser faaaam")
+    console.log("very bad browser faaaam")
     
   }
-  // navigator.mediaDevices.getUserMedia({
-  //   audio: true
-  // })
   
   //3 seconds transition time
   // prod time below
