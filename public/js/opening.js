@@ -28,8 +28,6 @@ $(document).ready(function() {
     console.log("very bad browser faaaam")
     
   }
-  
->>>>>>> main
   //3 seconds transition time
   // prod time below
   var transitiontime = 6500;
