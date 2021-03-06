@@ -30,9 +30,9 @@ $(document).ready(function() {
   }
   //3 seconds transition time
   // prod time below
-  var transitiontime = 6500;
+  // var transitiontime = 6500;
   //dev time below so that it is quicker for testing
-  // var transitiontime = 3000;
+  var transitiontime = 3000;
   //first text container
   $("#text1").fadeIn(4500);
   setTimeout(function() {

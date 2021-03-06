@@ -239,42 +239,56 @@ var requestAnimationFrame =
   window.webkitRequestAnimationFrame ||
   window.mozRequestAnimationFrame ||
   window.msRequestAnimationFrame;
+
 var time = 0;
 var fps = 60; //frames per second to determine how many frames I want per second
 
 const socket_loop = () => {
-    //use set timeout function to slowdown animation frame.
-    setTimeout(function(){
-        requestAnimationFrame(socket_loop);
-        socket.on("clientreceiveusersconnected",(data)=>{
-          console.log("Num of users connected ",numUsers);
-          numUsers = data;
-        })
-        if (numUsers >0 && previousNumUsers<numUsers){
-          for (var i=0;i<numUsers;i++){
-            appendObject(i);
-          }
+  //use set timeout function to slowdown animation frame.
+  setTimeout(function(){
+      requestAnimationFrame(socket_loop);
+      socket.on("clientreceiveusersconnected",(data)=>{
+        numUsers = data;
+      })
+      console.log("Num of users connected ",numUsers);
+      console.log("PreviousNum of users connected ",numUsers);
+      if (numUsers >0 && previousNumUsers<numUsers){
+        console.log("new shadooow");
+        for (var i=0;i<numUsers;i++){
+          //fix new model genration
+          console.log("new shadooow");
+          appendObject(i);
         }
-        else if(numUsers<previousNumUsers){
-          removeObject(previousNumUsers)
-        }
-        socket.emit('usersConnected');
-        previousNumUsers = numUsers;
+      }
+      else if(numUsers<previousNumUsers){
+        console.log("removeee")
+        removeObject(previousNumUsers)
+      }
+      socket.emit('usersConnected');
+      previousNumUsers = numUsers;
 
-      numUsers = data;
-      
-  }, 1000 / fps);
-};
+  },1000 / fps)
+  
+}
 
 socket_loop();
 
+// position of the camera in the beginning  0 1 4
+// https://stackoverflow.com/questions/5300938/calculating-the-position-of-points-in-a-circle
+
+
+var radius = 20;
+var center_x = 0;
+var center_z = 4;
 function appendObject(id) {
   // https://stackoverflow.com/questions/41336889/adding-new-entities-on-the-fly-in-aframe
-  let x = getRandomArbitrary(40, 50);
-  let y = 10;
-  let z = getRandomArbitrary(40,50);
+
+  
+  let x = radius*Math.cos(getRandomArbitrary(0,2*3.14)) + center_x ;
+  let z = radius*Math.sin(getRandomArbitrary(0,2*3.14)) + center_z ;
+  let y = 1;
   // imporve shadow randomization below
-  const position = `${getRandomArbitrary(-20,20)} ${1} ${getRandomArbitrary(-30,-20)}`;
+  const position = `${x} ${y} ${z}`;
 
   $('<a-plane/>', {
     id: `shadow${id}`,
@@ -285,10 +299,13 @@ function appendObject(id) {
     material:"src: #shadow; transparent: true",
     appendTo : $('#lobby')
   });
- document.getElementById(`shadow${id}`).setAttribute("position", position); // this does set position as a workaround
+ const shadow = document.getElementById(`shadow${id}`)
+ shadow.setAttribute("position", position); // this does set position as a workaround
+//  shadow.entity3D.lookAt(new THREE.Vector3(center_x,1, center_z));
 }
 
 function removeObject(objectCount){
+    console.log('Remove ',objectCount);
      let id = objectCount - 1;
      if (id<0){
        id = 0
