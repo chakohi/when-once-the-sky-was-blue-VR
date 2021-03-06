@@ -1,17 +1,19 @@
 $(document).ready(function() {
-  document.getElementById('player').play().catch((error)=>{
-    //remove normal text 
-    document.getElementById("opening_text").style.display = "none";
-    //display error text 
-    document.getElementById("audio_error_text").style.display = "block";
+  document
+    .getElementById("player")
+    .play()
+    .catch(error => {
+      //remove normal text
+      document.getElementById("opening_text").style.display = "none";
+      //display error text
+      document.getElementById("audio_error_text").style.display = "block";
+    });
 
-  });
-  
   //3 seconds transition time
   // prod time below
-  // var transitiontime = 6500;
+  var transitiontime = 6500;
   //dev time below so that it is quicker for testing
-  var transitiontime = 1000;
+  // var transitiontime = 3000;
   //first text container
   $("#text1").fadeIn(4500);
   setTimeout(function() {
@@ -49,12 +51,12 @@ function reload() {
   window.location.reload(false);
 }
 var scene = document.querySelector("a-scene");
-var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-if (!isChrome){
-    $('#iframeAudio').remove()
-}
-else {
-    $('#playAudio').remove() // just to make sure that it will not have 2x audio in the background 
+var isChrome =
+  /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+if (!isChrome) {
+  $("#iframeAudio").remove();
+} else {
+  $("#playAudio").remove(); // just to make sure that it will not have 2x audio in the background
 }
 
 var socket = io().connect();
