@@ -257,12 +257,12 @@ const socket_loop = () => {
         for (var i=0;i<numUsers;i++){
           //fix new model genration
           console.log("new shadooow");
-          appendObject(i);
+          // appendObject(i);
         }
       }
       else if(numUsers<previousNumUsers){
         console.log("removeee")
-        removeObject(previousNumUsers)
+        // removeObject(previousNumUsers)
       }
       socket.emit('usersConnected');
       previousNumUsers = numUsers;

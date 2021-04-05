@@ -5,6 +5,7 @@
     <script src="https://unpkg.com/aframe-tangram-terrain-component/dist/aframe-tangram-terrain-component.min.js"></script>
     <script src="https://unpkg.com/aframe-aabb-collider-component@3.1.0/dist/aframe-aabb-collider-component.min.js"></script>
     <script src="https://unpkg.com/aframe-proxy-event-component/dist/aframe-proxy-event-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script> 
     <link rel="stylesheet" href="static/opening.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
@@ -241,6 +242,86 @@
    loop: false; reapeat: 3; dir: alternate; autoplay: false"
         >
         </a-light>
+  
+
+<!-- shadowsss -->
+
+        <a-plane
+        id="shadow0"
+        material="src: #shadow; transparent: true"
+        position="0 0 0"
+        scale="10 10 10"
+        look-at="#lobbyCam"
+        ></a-plane>
+        <a-plane
+        id="shadow1"
+        material="src: #shadow; transparent: true"
+        position="2 0 0"
+        scale="10 10 10"
+        look-at="#lobbyCam"
+        ></a-plane>
+        <a-plane
+        id="shadow2"
+        material="src: #shadow; transparent: true"
+        position="3 0 0"
+        scale="10 10 10"
+        look-at="#lobbyCam"
+        ></a-plane>
+        <a-plane
+        id="shadow3"
+        material="src: #shadow; transparent: true"
+        position="4 0 0"
+        scale="10 10 10"
+        look-at="#lobbyCam"
+        ></a-plane>
+        <a-plane
+        id="shadow4"
+        material="src: #shadow; transparent: true"
+        position="5 0 0"
+        scale="10 10 10"
+        look-at="#lobbyCam"
+        ></a-plane>
+        <a-plane
+        id="shadow5"
+        material="src: #shadow; transparent: true"
+        position="6 0 0"
+        scale="10 10 10"
+        look-at="#lobbyCam"
+        ></a-plane>
+        <a-plane
+        id="shadow6"
+        material="src: #shadow; transparent: true"
+        position="7 0 0"
+        scale="10 10 10"
+        look-at="#lobbyCam"
+        ></a-plane>
+        <a-plane
+        id="shadow7"
+        material="src: #shadow; transparent: true"
+        position="8 0 0"
+        scale="10 10 10"
+        look-at="#lobbyCam"
+        ></a-plane>
+        <a-plane
+        id="shadow8"
+        material="src: #shadow; transparent: true"
+        position="9 0 0"
+        scale="10 10 10"
+        look-at="#lobbyCam"
+        ></a-plane>
+        <a-plane
+        id="shadow9"
+        material="src: #shadow; transparent: true"
+        position="10 0 0"
+        scale="10 10 10"
+        look-at="#lobbyCam"
+        ></a-plane>
+
+<!-- shadowsss -->
+
+
+
+
         <!-- event from cursor is what triggers this, triggered when the cursor reticls becomes a full circle. -->
         <a-entity
           francis2mouseenter
