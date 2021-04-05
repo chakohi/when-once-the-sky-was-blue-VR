@@ -250,25 +250,41 @@ const socket_loop = () => {
       socket.on("clientreceiveusersconnected",(data)=>{
         numUsers = data;
       })
-      // console.log("Num of users connected ",numUsers);
-      // console.log("PreviousNum of users connected ",numUsers);
-      if (numUsers >0 && previousNumUsers<numUsers){
-        console.log("new shadooow");
-        for (var i=0;i<numUsers;i++){
-          //fix new model genration
-          console.log("new shadooow");
-          // appendObject(i);
-        }
-      }
-      else if(numUsers<previousNumUsers){
-        console.log("removeee")
-        // removeObject(previousNumUsers)
-      }
       socket.emit('usersConnected');
       previousNumUsers = numUsers;
+      console.log(numUsers);
+      show_shadows(numUsers)
 
   },1000 / fps)
   
+}
+
+function show_shadows(numShadows){
+  console.log("show shadows function")
+  if (numShadows> 10){
+    numShadows = 10
+    for(var i = 0;i<numShadows;i++){
+      const el = document.querySelector(`#shadow${i}`)
+      el.setAttribute('visible', 'true')
+    }
+  }
+  else{
+    const show = numShadows;
+    const hide = 10-numShadows;
+    for(var i = 0;i<show;i++){
+      console.log(i)
+      const el = document.querySelector(`#shadow${i}`)
+      el.setAttribute('visible', 'true')
+    }
+    for(var i = show+1;i<hide;i++){
+      console.log(i)
+      const el = document.querySelector(`#shadow${i}`)
+      el.setAttribute('visible', 'false')
+    }
+
+
+  }
+
 }
 
 socket_loop();
