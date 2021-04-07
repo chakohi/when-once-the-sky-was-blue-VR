@@ -20,6 +20,7 @@ var userCount = 0;
 io.sockets.on('connection', function (socket) {
   console.log('new connection: ' + socket.id);
   userCount++;
+  console.log("Current user count",userCount);
 
   socket.on('usersConnected',() =>{
     socket.emit("clientreceiveusersconnected",(userCount));

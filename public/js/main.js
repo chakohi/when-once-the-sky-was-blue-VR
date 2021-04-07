@@ -239,42 +239,73 @@ var requestAnimationFrame =
   window.webkitRequestAnimationFrame ||
   window.mozRequestAnimationFrame ||
   window.msRequestAnimationFrame;
+
 var time = 0;
 var fps = 60; //frames per second to determine how many frames I want per second
 
 const socket_loop = () => {
-    //use set timeout function to slowdown animation frame.
-    setTimeout(function(){
-        requestAnimationFrame(socket_loop);
-        socket.on("clientreceiveusersconnected",(data)=>{
-          console.log("Num of users connected ",numUsers);
-          numUsers = data;
-        })
-        if (numUsers >0 && previousNumUsers<numUsers){
-          for (var i=0;i<numUsers;i++){
-            appendObject(i);
-          }
-        }
-        else if(numUsers<previousNumUsers){
-          removeObject(previousNumUsers)
-        }
-        socket.emit('usersConnected');
-        previousNumUsers = numUsers;
+  //use set timeout function to slowdown animation frame.
+  setTimeout(function(){
+      requestAnimationFrame(socket_loop);
+      socket.on("clientreceiveusersconnected",(data)=>{
+        numUsers = data;
+      })
+      socket.emit('usersConnected');
+      previousNumUsers = numUsers;
+      console.log(numUsers);
+      show_shadows(numUsers)
 
-      numUsers = data;
-      
-  }, 1000 / fps);
-};
+  },1000 / fps)
+  
+}
+
+function show_shadows(numShadows){
+  console.log("show shadows function")
+  if (numShadows> 10){
+    numShadows = 10
+    for(var i = 0;i<numShadows;i++){
+      const el = document.querySelector(`#shadow${i}`)
+      el.setAttribute('visible', 'true')
+    }
+  }
+  else{
+    const show = numShadows;
+    const hide = 10-numShadows;
+    for(var i = 0;i<show;i++){
+      console.log(i)
+      const el = document.querySelector(`#shadow${i}`)
+      el.setAttribute('visible', 'true')
+    }
+    for(var i = show+1;i<hide;i++){
+      console.log(i)
+      const el = document.querySelector(`#shadow${i}`)
+      el.setAttribute('visible', 'false')
+    }
+
+
+  }
+
+}
 
 socket_loop();
 
+// position of the camera in the beginning  0 1 4
+// https://stackoverflow.com/questions/5300938/calculating-the-position-of-points-in-a-circle
+
+
+var radius = 20;
+var center_x = 0;
+var center_z = 4;
 function appendObject(id) {
   // https://stackoverflow.com/questions/41336889/adding-new-entities-on-the-fly-in-aframe
-  let x = getRandomArbitrary(40, 50);
-  let y = 10;
-  let z = getRandomArbitrary(40,50);
+
+  const random_angle = getRandomArbitrary(0,2*3.14);
+  const random_angle_in_degrees = (random_angle * 360)/(2*3.14)
+  let x = radius*Math.cos(random_angle) + center_x ;
+  let z = radius*Math.sin(random_angle) + center_z ;
+  let y = 1;
   // imporve shadow randomization below
-  const position = `${getRandomArbitrary(-20,20)} ${1} ${getRandomArbitrary(-30,-20)}`;
+  const position = `${x} ${y} ${z}`;
 
   $('<a-plane/>', {
     id: `shadow${id}`,
@@ -283,12 +314,23 @@ function appendObject(id) {
     scale: "10 10 10",
     rotation: "0 0 0",
     material:"src: #shadow; transparent: true",
-    appendTo : $('#lobby')
+    appendTo : $('#lobby'), 
+    lookAt:"#lobbycam",
   });
- document.getElementById(`shadow${id}`).setAttribute("position", position); // this does set position as a workaround
+ var shadow = document.getElementById(`shadow${id}`)
+ shadow.setAttribute("position", position); // this does set position as a workaround;
+
+ //rotate to look at center: https://stackoverflow.com/questions/62996415/how-to-use-look-at-feature-in-ar-js-programatically
+ shadow.setAttribute("look-at", "[camera]");
+ const object3D = shadow.object3D;
+ console.log("OBJECT 3D \N ",object3D);
+ object3D.lookAt(new THREE.Vector3(0, 1, -6));
+// console.log("oeifpeqpoqem[qefkq[eofqe[fofeq[ok")
+ console.log(shadow);
 }
 
 function removeObject(objectCount){
+    console.log('Remove ',objectCount);
      let id = objectCount - 1;
      if (id<0){
        id = 0
