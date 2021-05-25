@@ -1,32 +1,31 @@
 $(document).ready(function() {
   // document.getElementById('player').play().catch((error)=>{
-  //   //remove normal text 
+  //   //remove normal text
   //   document.getElementById("opening_text").style.display = "none";
-  //   //display error text 
+  //   //display error text
   //   document.getElementById("audio_error_text").style.display = "block";
 
   // });
-  navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
-  navigator.mozGetUserMedia ||
-  navigator.msGetUserMedia
+  navigator.getUserMedia =
+    navigator.getUserMedia ||
+    navigator.webkitGetUserMedia ||
+    navigator.mozGetUserMedia ||
+    navigator.msGetUserMedia;
 
   if (navigator.getUserMedia) {
     navigator.getUserMedia(
-      {  audio: true },
+      { audio: true },
       function onSuccess(stream) {
-          // go play
-          console.log("yaaaaay wohhooooo")
-          document.getElementById('player').play()
-
+        // go play
+        console.log("yaaaaay wohhooooo");
+        document.getElementById("player").play();
       },
       function onError(error) {
-        console.log("naaaaah why u mad at me")
-        
+        console.log("naaaaah why u mad at me");
       }
-    )
+    );
   } else {
-    console.log("very bad browser faaaam")
-    
+    console.log("very bad browser faaaam");
   }
   //3 seconds transition time
   // prod time below
@@ -99,6 +98,9 @@ function timeout() {
   //             $("#textcontainer4").remove();
   document.querySelector("#waitOnMe").remove();
   scene.play();
+  var myAudio = document.getElementById("base_layer_always_on");
+  myAudio.play();
+  myAudio.volume = 0.8;
   setTimeout(function() {
     document.querySelector("#openingTitle").remove();
   }, 400);

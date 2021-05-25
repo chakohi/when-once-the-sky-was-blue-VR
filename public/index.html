@@ -11,14 +11,31 @@
   </head>
 
   <body>
+    <audio id="player" autoplay allow="autoplay">
+      <source src="sounds/hallway_exp.mp3" type="audio/mp3" />
+    </audio>
+    <audio id="ground_addition_to_base">
+      <source src="sounds/ground_addition_to_base.mp3" type="audio/mp3" />
+    </audio>
+
+    <audio id="performance_of_the_ground">
+      <source src="sounds/performance_of_the_ground.mp3" type="audio/mp3" />
+    </audio>
+    <audio id="base_layer_always_on" loop>
+      <source src="sounds/base_layer_always_on.mp3" type="audio/mp3" />
+    </audio>
+    <audio id="hallway_addition_to_base">
+      <source src="sounds/hallway_addition_to_base.mp3" type="audio/mp3" />
+    </audio>
     <div id="openingTitle">
       <div id="fullscreenFadeIn"></div>
-      <audio id="player" autoplay loop allow="autoplay">
-        <source src="sounds/lobbysound.mp3" type="audio/mp3" />
-      </audio>
-      <!-- <div id="audio_error_text" class="textcontainer">
-        <h1 id="text3">Your browser currently does not allow audio. Please change your audio permissions and reload the page to enjoy this performance.</h1>
-      </div> -->
+
+      <div id="audio_error_text" class="textcontainer">
+        <h1 id="text3">
+          Your browser currently does not allow audio. Please change your audio
+          permissions and reload the page to enjoy this performance.
+        </h1>
+      </div>
       <div id="opening_text">
         <div class="textcontainer" id="textcontainer1">
           <h1 class="nodisplay" id="text1">When once the sky was blue</h1>
@@ -75,6 +92,14 @@
         <img id="shadow" crossorigin="anonymous" src="static/shadow.png" />
         <a-asset-item id="francis-obj" src="static/cloak.obj"></a-asset-item>
         <a-asset-item id="francis-mtl" src="static/cloak.mtl"></a-asset-item>
+        <a-asset-item
+          id="francis-color-obj"
+          src="static/colours/cloak_red.obj"
+        ></a-asset-item>
+        <a-asset-item
+          id="francis-color-mtl"
+          src="static/colours/cloak_red.mtl"
+        ></a-asset-item>
         <img id="skymap" src="textures/sky2.png" crossorigin="anonymous" />
         <img id="flare" src="textures/flare.jpg" />
         <img
@@ -101,9 +126,8 @@
         />
         <img id="cracksWhite" src="textures/cracksTextures/crackWhite.png" />
       </a-assets>
-      <!-- for some reason this allows the scene to be paused on loading the page. -->
+      <!-- IMPORTANT: for some reason this allows the scene to be paused on loading the page. -->
       <a-node id="waitOnMe"></a-node>
-
       <a-entity id="lobby">
         <a-plane
           position="0 0 -4"
@@ -144,9 +168,14 @@
           animation="property: color; dir: alternate; dur: 1800; delay: 50; loop: false; repeat: 1; from: #000000; to: #ffffff; autoplay: false"
         >
         </a-sky>
-        <a-entity position="0 1 4">
+        <a-entity position="0 1 0">
           <a-entity camera foo look-controls wasd-controls id="lobbyCam">
             <!-- this is the cursor, the startEvents: click is what triggers transitions in #francis1 #francis2 #francis3-->
+            <!-- code taken from this example: https://codepen.io/Perhelion/pen/gOavybJ
+            objects that can be interacted with are of class "francis," raycaster max distance is 3 units, 
+            hovering over one of the .francis objects triggers the animation__click, animation__fuse and animation__mouseleave events, changing 
+          the length of the ring of reticle. Triggers animations of type "startEvents: click" which are the lights below that change when entering a woeld
+        -->
             <a-entity
               id="cursorReticle"
               position="0 0 -1.2"
@@ -161,6 +190,7 @@
             </a-entity>
           </a-entity>
         </a-entity>
+        <!-- ambient light for whole scene-->
         <a-entity
           light="color: #BBB; type: ambient"
           data-aframe-default-light=""
@@ -169,8 +199,9 @@
           color="#ffffff"
           animation="property: color; dur: 4000;
         from: #ffffff; to: #BBB;
-        loop: false; reapeat: 3; dir: alternate; autoplay: true"
+        loop: false;  dir: alternate; autoplay: true"
         ></a-entity>
+        <!-- more ambient light.-->
         <a-entity
           light="intensity: 1.2; castShadow: true"
           position="-0.5 1 1"
@@ -179,9 +210,9 @@
           visible=""
           animation="property: color; dur: 4000;
           from: #ffffff; to: #BBB;
-          loop: false; reapeat: 3; dir: alternate; autoplay: true"
+          loop: false; dir: alternate; autoplay: true"
         ></a-entity>
-        <!-- all these lights are used to transition between scenes and when entering the lobby as well -->
+        <!-- all these lights are used to transition between scenes and when entering the lobby as well, these "sit" below each francis. -->
         <a-light
           type="point"
           intensity="1"
@@ -206,6 +237,7 @@
        loop: false; reapeat: 3; dir: alternate; autoplay: false"
         >
         </a-light>
+        <!-- "startEvents: click;" triggers bright light transition animation with raycast on reticle object. -->
         <a-entity
           francis1mouseenter
           id="francis1"
@@ -214,6 +246,19 @@
           position="-5.048 -0.238 -3"
           scale="0.03 0.03 0.03"
           rotation="0 50 0"
+          light="type: hemisphere; color: white; intensity: 0;"
+          animation__rotation="property: light.intensity; from:0; to: 8; loop: 1; dur: 2000; delay:100; dir: alternate; startEvents: click;"
+        >
+        </a-entity>
+        <a-entity
+          francis1mouseenter
+          id="francisColorOne"
+          class="francis"
+          obj-model="obj: #francis-color-obj; mtl: #francis-color-mtl"
+          position="-5.048 -0.238 -3"
+          scale="0.03 0.03 0.03"
+          rotation="0 50 0"
+          visible="false"
           light="type: hemisphere; color: white; intensity: 0;"
           animation__rotation="property: light.intensity; from:0; to: 8; loop: 1; dur: 2000; delay:100; dir: alternate; startEvents: click;"
         >
@@ -355,7 +400,11 @@
           animation__rotation="property: light.intensity; from:0; to: 8; loop: 1; dur: 2000; delay:100; dir: alternate; startEvents: click;"
         ></a-entity>
       </a-entity>
+
+      <!-- container for first performance (shapes and mountains-->
       <a-entity id="firstPerformance" visible="false">
+        <!-- sky animation transitions from yellow to violet on enter, waiting for the change to a certain red value is detected in the script
+        to change the scene back to lobby-->
         <a-sky
           id="scene1Sky"
           geometry="primitive:sphere; radius:170; phiLength:360; phiStart:0; thetaLength:90"
@@ -364,6 +413,8 @@
           from: #ffff00 ; to: #ff5cff;
           loop: false; dir: alternate; autoplay: false"
         ></a-sky>
+        <!-- first ground plane, has a texture of #cracksWhite, the opacity gets faded to reveal the solid colored plane -->
+
         <a-entity
           geometry="primitive: plane; width: 340; height: 340; segmentsHeight: 0; segmentsWidth: 0;"
           rotation="-90 0 0"
@@ -371,6 +422,8 @@
           material="roughness: 1; normalMap: #normalMapCracks; normalScale: 10; color: #0f0f0f; src:#cracksWhite; repeat: 22 22"
         ></a-entity>
         <a-light type="directional" position="0 2 0"></a-light>
+        <!-- the solid colored ground plane -->
+
         <a-entity
           id="floorToFadeScene1"
           geometry="primitive: plane; width: 340; height: 340; segmentsHeight: 0; segmentsWidth: 0;"
@@ -382,8 +435,10 @@
           loop: false; dir: alternate; autoplay: false"
         ></a-entity>
       </a-entity>
-
+      <!-- container for second scene (embers)-->
       <a-entity id="secondPerformance" visible="false">
+        <!-- sky animation transitions from yellow to red on enter, waiting for the change to a certain red value is detected in the script
+        to change the scene back to lobby-->
         <a-sky
           id="scene2Sky"
           color="#ffc04c "
@@ -391,19 +446,15 @@
         from: #ffc04c ; to: #4c0000;
         loop: false; dir: alternate; autoplay: false"
         ></a-sky>
+        <!-- from particle library: https://unpkg.com/aframe-particle-system-component@1.1.3/dist/aframe-particle-system-component.min.js-->
         <a-entity
-          position="0 2.25 -15"
-          particle-system="preset: dust"
-        ></a-entity>
-        <a-entity
-          id="particles"
-          position="0 5 -15"
-          particle-system="opacity:color: #FF4500,#FFF; size: 0.5; positionSpread: 25 25 25; texture: ./textures/particletexture.png; accelerationValue: 0 -1.2 0; velocityValue: 0 0.001 0; maxParticleCount: 2500; rotationAngle: 1.4"
-          animation__2="property: opacity; dur: 5000;
-        from: 0; to: 1;
-        loop: false; dir: alternate; autoplay: true"
+          position="0 26 3"
+          id="embers"
+          particle-system="preset: dust; enabled: true; particleCount: 5000; opacity: 1; maxAge: 180; velocityValue: 0.04 0.22 0.04; positionSpread: 60 8 60; size: 0.4;"
         ></a-entity>
       </a-entity>
+      <!-- container for third scene (stars)-->
+
       <a-entity id="thirdPerformance" visible="false">
         <a-sky
           src="#skyOne"
