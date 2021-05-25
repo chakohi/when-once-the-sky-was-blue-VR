@@ -20,23 +20,64 @@ AFRAME.registerComponent("shaperain", {
   init: function() {
   //console.log('shape-man');
   this.shapesreference = []
-  let countX = 10;
+  let countX = 20;
+  let shapeTypes = 5;
   this.shapes = [];
   let size = 0.2, spacing = 1, x;
   let sceneEl = document.querySelector('a-scene');
   for (let i=0; i<countX; i++){
-    this.shapes[i] = document.createElement('a-entity'); // create the element
-      // create components, id, geometry, position
-    this.shapes[i].setAttribute('id', 'box_'+i.toString());
-    this.shapes[i].setAttribute('geometry', {
-      primitive: 'box',
-      height: size,
-      width: size,
-      depth: size
-    });
-    x = (size + spacing) * countX * (-0.5) + i * (size + spacing) ;
-    y = Math.random() * 0.9 + 1.5;
-    this.shapes[i].setAttribute('position', x.toString()+ ' '+y.toString()+' 0' );
+    // create the element
+    this.shapes[i] = document.createElement('a-entity');
+    if (i%shapeTypes === 0){
+        // create components, id, geometry, position
+      this.shapes[i].setAttribute('id', 'box_'+i.toString());
+      this.shapes[i].setAttribute('geometry', {
+        primitive: 'box',
+        height: size,
+        width: size,
+        depth: size
+      });
+      x = (size + spacing) * countX * (-0.5) + i * (size + spacing) ;
+      y = Math.random() * 0.9 + 1.5;
+      this.shapes[i].setAttribute('position', x.toString()+ ' '+y.toString()+' 0' );
+    } else if (i%shapeTypes === 1) {
+      this.shapes[i].setAttribute('id', 'Sphere_'+i.toString());
+      this.shapes[i].setAttribute('geometry', {
+        primitive: 'sphere',
+        radius: size, 
+      });
+      x = (size + spacing) * countX * (-0.5) + i * (size + spacing) ;
+      y = Math.random() * 0.9 + 1.5;
+      this.shapes[i].setAttribute('position', x.toString()+ ' '+y.toString()+' 0' );
+    } else if (i%shapeTypes === 2) {
+      this.shapes[i].setAttribute('id', 'Cylinder_'+i.toString());
+      this.shapes[i].setAttribute('geometry', {
+        primitive: 'cylinder',
+        height: size,
+        radius: size
+      });
+      x = (size + spacing) * countX * (-0.5) + i * (size + spacing) ;
+      y = Math.random() * 0.9 + 1.5;
+      this.shapes[i].setAttribute('position', x.toString()+ ' '+y.toString()+' 0' );
+    } else if (i%shapeTypes === 3) {
+      this.shapes[i].setAttribute('id', 'Tetrahedron_'+i.toString());
+      this.shapes[i].setAttribute('geometry', {
+        primitive: 'tetrahedron',
+        radius: size,
+      });
+      x = (size + spacing) * countX * (-0.5) + i * (size + spacing) ;
+      y = Math.random() * 0.9 + 1.5;
+      this.shapes[i].setAttribute('position', x.toString()+ ' '+y.toString()+' 0' );
+    } else if (i%shapeTypes === 4) {
+      this.shapes[i].setAttribute('id', 'Dodecahedron_'+i.toString());
+      this.shapes[i].setAttribute('geometry', {
+        primitive: 'dodecahedron',
+        radius: size,
+      });
+      x = (size + spacing) * countX * (-0.5) + i * (size + spacing) ;
+      y = Math.random() * 0.9 + 1.5;
+      this.shapes[i].setAttribute('position', x.toString()+ ' '+y.toString()+' 0' );
+    
     
     // you can add event listeners here for interaction, such as mouse events.
     sceneEl.appendChild(this.shapes[i]);// Append the element to the scene, so it becomes part of the DOM.
