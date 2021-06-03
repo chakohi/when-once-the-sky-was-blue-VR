@@ -24,7 +24,7 @@ var scene = document.querySelector("a-scene");
 
 AFRAME.registerComponent("foo", {
   //initialize js variables to components in aframe with their classes and ids
-  init: function() {
+  init: function () {
     scene.pause();
     changedFrancis1 = document.querySelector("#francisColorOne");
     embers = document.querySelector("#embers");
@@ -56,7 +56,7 @@ AFRAME.registerComponent("foo", {
     scene2El.setAttribute("visible", "false");
     scene3El.setAttribute("visible", "false");
   },
-  tick: function(time) {
+  tick: function (time) {
     if (state == 0) {
       //transition  to other scene is triggered once light attached to each francis reaches a certain value.
       //Initial light transitions are not triggered in this script, they are native to a-frame with the cursor object triggering the light when the hover is long enough.
@@ -70,7 +70,7 @@ AFRAME.registerComponent("foo", {
         lobbySkyTransition.setAttribute("visible", "true");
         lobbySkyTransition.setAttribute("animation", "autoplay", true);
         $("#panelToFadeBetweenScenes").fadeIn(1900);
-        setTimeout(function() {
+        setTimeout(function () {
           $("#panelToFadeBetweenScenes").fadeOut(1900);
         }, 2000);
         //when light really really gets intense then we actually change the scene
@@ -91,16 +91,16 @@ AFRAME.registerComponent("foo", {
           myAudio.play();
           myAudio.volume = 0.6;
           //first text container
-          setTimeout(function() {
+          setTimeout(function () {
             $("#breatheIn").fadeIn(4500);
           }, 2000);
-          setTimeout(function() {
+          setTimeout(function () {
             $("#breatheIn").fadeOut(1900);
           }, 5000);
-          setTimeout(function() {
+          setTimeout(function () {
             $("#breatheOut").fadeIn(4500);
           }, 9000);
-          setTimeout(function() {
+          setTimeout(function () {
             $("#breatheOut").fadeOut(3000);
           }, 12000);
           //moving boxes can be triggered here
@@ -126,13 +126,13 @@ AFRAME.registerComponent("foo", {
 
           skyElementSecond.setAttribute("animation", "autoplay", true);
           $("#breatheIn").fadeIn(4500);
-          setTimeout(function() {
+          setTimeout(function () {
             $("#breatheIn").fadeOut(1900);
           }, 3000);
-          setTimeout(function() {
+          setTimeout(function () {
             $("#breatheOut").fadeIn(4500);
           }, 6000);
-          setTimeout(function() {
+          setTimeout(function () {
             $("#breatheOut").fadeOut(3000);
           }, 9000);
         }
@@ -173,7 +173,7 @@ AFRAME.registerComponent("foo", {
         }
         if (redVal < 1) {
           $("#panelToFadeBetweenScenes").fadeIn(1900);
-          setTimeout(function() {
+          setTimeout(function () {
             $("#panelToFadeBetweenScenes").fadeOut(1900);
             scene2El.setAttribute("visible", false);
             lobbyEl.setAttribute("visible", true);
@@ -193,7 +193,7 @@ AFRAME.registerComponent("foo", {
     if (state == 3) {
       if (skyElementFirst.components.material.material.color.g < 0.37) {
         $("#panelToFadeBetweenScenes").fadeIn(1900);
-        setTimeout(function() {
+        setTimeout(function () {
           $("#panelToFadeBetweenScenes").fadeOut(1900);
           state = 0;
           changedFrancis1.setAttribute("visible", true);
@@ -211,13 +211,12 @@ AFRAME.registerComponent("foo", {
     }
     // even though this says state 4, this is still referring to the third francis and its associated scene (stars and falling plane)
     if (state == 4) {
-      if (time < 5000) {
-      } else {
+      if (time < 5000) {} else {
         planePos -= 0.02;
         console.log("planePos is: " + planePos);
         if (planePos <= -20) {
           $("#panelToFadeBetweenScenes").fadeIn(1900);
-          setTimeout(function() {
+          setTimeout(function () {
             $("#panelToFadeBetweenScenes").fadeOut(1900);
             state = 0;
             scene3El.setAttribute("visible", false);
@@ -260,7 +259,7 @@ var fps = 60; //frames per second to determine how many frames I want per second
 
 const socket_loop = () => {
   //use set timeout function to slowdown animation frame.
-  setTimeout(function() {
+  setTimeout(function () {
     requestAnimationFrame(socket_loop);
     socket.on("clientreceiveusersconnected", data => {
       // console.log("Num of users connected ", numUsers);
@@ -275,8 +274,8 @@ const socket_loop = () => {
     }
     socket.emit("usersConnected");
     previousNumUsers = numUsers;
-
-    numUsers = data;
+    // the following line is commented out to clean up the console log as it is throwing a "data not defined" error
+    // numUsers = data;
   }, 1000 / fps);
 };
 
@@ -289,6 +288,7 @@ socket_loop();
 var radius = 20;
 var center_x = 0;
 var center_z = 4;
+
 function appendObject(id) {
   // https://stackoverflow.com/questions/41336889/adding-new-entities-on-the-fly-in-aframe
   let x = getRandomArbitrary(40, 50);
@@ -332,15 +332,17 @@ var roundtripcounter = 0;
 var shapes = [];
 var shapepositions = {};
 AFRAME.registerComponent("shaperain", {
-  init: function() {
+  init: function () {
     console.log("shape-rainnnjnnnnnnn");
     this.shapesreference = [];
-    let countX = 10;
+    let countX = 5;
     // this.shapes = [];
     let size = 0.2,
       spacing = 1,
       x;
     let sceneEl = document.querySelector("#firstPerformance");
+
+    // loop to make the boxes
     for (let i = 0; i < countX; i++) {
       shapes[i] = document.createElement("a-entity"); // create the element
       // create components, id, geometry, position
@@ -353,7 +355,7 @@ AFRAME.registerComponent("shaperain", {
       });
       x = (size + spacing) * countX * -0.5 + i * (size + spacing);
       y = Math.random() * 0.9 + 1.5;
-      z = getRandomArbitrary(-5, 5);
+      z = getRandomArbitrary(-10, 13);
       const position = `${x} ${y} ${z}`;
       const position_dictionary = {
         x: x,
@@ -374,6 +376,109 @@ AFRAME.registerComponent("shaperain", {
       shape_from_DOM.setAttribute("position", position);
       console.log("Shape from DOM new pos: \n", shape_from_DOM);
     }
+
+    // loop to make the spheres
+    for (let i = 10; i < (10+countX); i++) {
+      shapes[i] = document.createElement("a-entity"); // create the element
+      // create components, id, geometry, position
+      shapes[i].setAttribute("id", "sphere_" + i.toString());
+      shapes[i].setAttribute("geometry", {
+        primitive: "sphere",
+        radius: size,
+      });
+
+      x = (size + spacing) * countX * -0.5 + (i-10) * (size + spacing) * Math.random(0.8,1.2);
+      y = Math.random() * 0.9 + 1.5;
+      z = getRandomArbitrary(-11, 8);
+      const position = `${x} ${y} ${z}`;
+      const position_dictionary = {
+        x: x,
+        y: y,
+        z: z,
+        z_initial: z
+      };
+      console.log("intended pos of shape", position);
+      shapes[i].setAttribute("position", position);
+      shapepositions["sphere_" + i.toString()] = position_dictionary;
+
+      // you can add event listeners here for interaction, such as mouse events.
+      sceneEl.appendChild(shapes[i]); // Append the element to the scene, so it becomes part of the DOM.
+
+      // set position of the shape once its in the DOM as a workaround
+      const shape_from_DOM = document.getElementById("sphere_" + i.toString());
+      console.log("Shape from DOM old pos: \n", shape_from_DOM);
+      shape_from_DOM.setAttribute("position", position);
+      console.log("Shape from DOM new pos: \n", shape_from_DOM);
+    }
+
+    // loop to make the dodecahedrons
+    for (let i = 20; i < (20+countX); i++) {
+      shapes[i] = document.createElement("a-entity"); // create the element
+      // create components, id, geometry, position
+      shapes[i].setAttribute("id", "dodecahedron_" + i.toString());
+      shapes[i].setAttribute("geometry", {
+        primitive: "dodecahedron",
+        radius: size,
+      });
+
+      x = ((size + spacing) * countX * -0.5 + (i-20) * (size + spacing)) * Math.random(0.8,1.2);
+      y = Math.random() * 0.9 + 1.5;
+      z = getRandomArbitrary(-9, 6);
+      const position = `${x} ${y} ${z}`;
+      const position_dictionary = {
+        x: x,
+        y: y,
+        z: z,
+        z_initial: z
+      };
+      console.log("intended pos of shape", position);
+      shapes[i].setAttribute("position", position);
+      shapepositions["dodecahedron_" + i.toString()] = position_dictionary;
+
+      // you can add event listeners here for interaction, such as mouse events.
+      sceneEl.appendChild(shapes[i]); // Append the element to the scene, so it becomes part of the DOM.
+
+      // set position of the shape once its in the DOM as a workaround
+      const shape_from_DOM = document.getElementById("dodecahedron_" + i.toString());
+      console.log("Shape from DOM old pos: \n", shape_from_DOM);
+      shape_from_DOM.setAttribute("position", position);
+      console.log("Shape from DOM new pos: \n", shape_from_DOM);
+    }
+
+    // loop to make the tetrahedrons
+    for (let i = 30; i < (30+countX); i++) {
+      shapes[i] = document.createElement("a-entity"); // create the element
+      // create components, id, geometry, position
+      shapes[i].setAttribute("id", "tetrahedron_" + i.toString());
+      shapes[i].setAttribute("geometry", {
+        primitive: "tetrahedron",
+        radius: size,
+      });
+
+      x = ((size + spacing) * countX * -0.5 + (i-30) * (size + spacing)) * Math.random(0.8,1.2);
+      y = Math.random() * 0.9 + 1.5;
+      z = getRandomArbitrary(-10, 5);
+      const position = `${x} ${y} ${z}`;
+      const position_dictionary = {
+        x: x,
+        y: y,
+        z: z,
+        z_initial: z
+      };
+      console.log("intended pos of shape", position);
+      shapes[i].setAttribute("position", position);
+      shapepositions["tetrahedron_" + i.toString()] = position_dictionary;
+
+      // you can add event listeners here for interaction, such as mouse events.
+      sceneEl.appendChild(shapes[i]); // Append the element to the scene, so it becomes part of the DOM.
+
+      // set position of the shape once its in the DOM as a workaround
+      const shape_from_DOM = document.getElementById("tetrahedron_" + i.toString());
+      console.log("Shape from DOM old pos: \n", shape_from_DOM);
+      shape_from_DOM.setAttribute("position", position);
+      console.log("Shape from DOM new pos: \n", shape_from_DOM);
+    }
+
     // If you want to access THREEjs properties, you need to access them after they have loaded into the scene.
     // Get the shapes as THREEjs object
     // shapePosArr = [];
@@ -385,8 +490,8 @@ AFRAME.registerComponent("shaperain", {
     //   });
     // });
   },
-  tick: function() {
-    shapes.forEach(function(shape) {
+  tick: function () {
+    shapes.forEach(function (shape) {
       // if (roundtripcounter > 30){
       //   window.location.href = '/lobby';
       // }
