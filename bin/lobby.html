@@ -10,6 +10,7 @@
 		<a-assets>
 		  <a-asset-item id="francis-obj" src="static/francis.obj"></a-asset-item>
 		  <a-asset-item id="francis-mtl" src="static/francis.mtl"></a-asset-item>
+			<a-asset-item id="openingVoice" src="static/sounds/new/0_opening VO.mp3"></a-asset-item>
 		</a-assets>
 
 		<!-- Scene essentials -->
@@ -21,7 +22,7 @@
 
 		<!-- 3D models -->
 		<!-- <a-box position="-5.048 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box> -->
-		<a-entity id="francis1" obj-model="obj: #francis-obj; mtl: #francis-mtl" position="-5.048 -0.238 -3" scale="0.704 0.704 0.704"></a-entity>
+		<a-entity id="francis1" obj-model="obj: #francis-obj; mtl: #francis-mtl" position="-5.048 -0.238 -3" scale="0.704 0.704 0.704" sound="src: #openingVoice; autoplay: true; distanceModel: linear; loop: true; positional: false"></a-entity>
 		<!-- <a-sphere position="0 1.25 -6.897" radius="1.25" color="#EF2D5E"></a-sphere> -->
 		<a-entity id="francis2" obj-model="obj: #francis-obj; mtl: #francis-mtl" position="0 -0.238 -6.897" scale="0.704 0.704 0.704"></a-entity>
 		<!-- <a-cylinder position="4.748 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder> -->

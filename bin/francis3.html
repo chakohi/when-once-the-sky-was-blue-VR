@@ -9,6 +9,9 @@
     <a-scene id="thirdPerformance">
       <a-assets>
         <img id="sky" src="textures/starry.png" />
+
+        <a-asset-item id="aurora" src="public/static/auroras.obj"></a-asset-item>
+
         <a-asset-item
           id="yamlElevation"
           src="https://raw.githubusercontent.com/tangrams/terrain-demos/master/styles/terrarium-elevation.yaml"
@@ -18,6 +21,8 @@
 
         <img id="normalmap" src="textures/normalmap.png" />
       </a-assets>
+
+      <a-entity obj-model="obj: #auroroa" material="color: #FF0000" position="0 0 0"></a-entity>
 
       <a-sky
         src="#sky"
