@@ -337,19 +337,20 @@ function getRandomArbitrary(min, max) {
 var roundtripcounter = 0;
 var shapes = [];
 var shapepositions = {};
+
 AFRAME.registerComponent("shaperain", {
   init: function () {
     console.log("shape-rainnnjnnnnnnn");
     this.shapesreference = [];
-    let countX = 5;
+    let objects_per_shape = 10;
     // this.shapes = [];
-    let size = 0.2,
+    let size = 0.4w,
       spacing = 1,
       x;
     let sceneEl = document.querySelector("#firstPerformance");
 
     // loop to make the boxes
-    for (let i = 0; i < countX; i++) {
+    for (let i = 0; i < objects_per_shape; i++) {
       shapes[i] = document.createElement("a-entity"); // create the element
       // create components, id, geometry, position
       shapes[i].setAttribute("id", "box_" + i.toString());
@@ -359,9 +360,9 @@ AFRAME.registerComponent("shaperain", {
         width: size,
         depth: size
       });
-      x = (size + spacing) * countX * -0.5 + i * (size + spacing);
-      y = Math.random() * 0.9 + 1.5;
-      z = getRandomArbitrary(-10, 13);
+      x = (size + spacing) * objects_per_shape * -0.5 + i * (size + spacing);
+      y = Math.random() + 1.5;
+      z = getRandomArbitrary(-10, 10);
       const position = `${x} ${y} ${z}`;
       const position_dictionary = {
         x: x,
@@ -384,7 +385,7 @@ AFRAME.registerComponent("shaperain", {
     }
 
     // loop to make the spheres
-    for (let i = 10; i < (10+countX); i++) {
+    for (let i = 10; i < (2*objects_per_shape); i++) {
       shapes[i] = document.createElement("a-entity"); // create the element
       // create components, id, geometry, position
       shapes[i].setAttribute("id", "sphere_" + i.toString());
@@ -393,9 +394,9 @@ AFRAME.registerComponent("shaperain", {
         radius: size,
       });
 
-      x = (size + spacing) * countX * -0.5 + (i-10) * (size + spacing) * Math.random(0.8,1.2);
-      y = Math.random() * 0.9 + 1.5;
-      z = getRandomArbitrary(-11, 8);
+      x = (size + spacing) * objects_per_shape * -0.5 + (i-10) * (size + spacing) * Math.random(0.8,1.2);
+      y = Math.random() + 1.5;
+      z = getRandomArbitrary(-10, 10);
       const position = `${x} ${y} ${z}`;
       const position_dictionary = {
         x: x,
@@ -418,7 +419,7 @@ AFRAME.registerComponent("shaperain", {
     }
 
     // loop to make the dodecahedrons
-    for (let i = 20; i < (20+countX); i++) {
+    for (let i = 20; i < (3*objects_per_shape); i++) {
       shapes[i] = document.createElement("a-entity"); // create the element
       // create components, id, geometry, position
       shapes[i].setAttribute("id", "dodecahedron_" + i.toString());
@@ -427,9 +428,9 @@ AFRAME.registerComponent("shaperain", {
         radius: size,
       });
 
-      x = ((size + spacing) * countX * -0.5 + (i-20) * (size + spacing)) * Math.random(0.8,1.2);
-      y = Math.random() * 0.9 + 1.5;
-      z = getRandomArbitrary(-9, 6);
+      x = ((size + spacing) * objects_per_shape * -0.5 + (i-20) * (size + spacing)) * Math.random(0.8,1.2);
+      y = Math.random() + 3;
+      z = getRandomArbitrary(-10, 10);
       const position = `${x} ${y} ${z}`;
       const position_dictionary = {
         x: x,
@@ -452,7 +453,7 @@ AFRAME.registerComponent("shaperain", {
     }
 
     // loop to make the tetrahedrons
-    for (let i = 30; i < (30+countX); i++) {
+    for (let i = 30; i < (4*objects_per_shape); i++) {
       shapes[i] = document.createElement("a-entity"); // create the element
       // create components, id, geometry, position
       shapes[i].setAttribute("id", "tetrahedron_" + i.toString());
@@ -461,9 +462,9 @@ AFRAME.registerComponent("shaperain", {
         radius: size,
       });
 
-      x = ((size + spacing) * countX * -0.5 + (i-30) * (size + spacing)) * Math.random(0.8,1.2);
-      y = Math.random() * 0.9 + 1.5;
-      z = getRandomArbitrary(-10, 5);
+      x = ((size + spacing) * objects_per_shape * -0.5 + (i-30) * (size + spacing)) * Math.random(0.8,1.2);
+      y = Math.random() * 0.9 + 3;
+      z = getRandomArbitrary(-10, 10);
       const position = `${x} ${y} ${z}`;
       const position_dictionary = {
         x: x,
@@ -518,6 +519,7 @@ AFRAME.registerComponent("shaperain", {
       if (zPos > 9) {
         shapepositions[shape_id]["z"] = shapepositions[shape_id]["z_initial"];
         shape.setAttribute("color", getRandomColor());
+        zPos = shapepositions[shape_id]["z"] = -10;
       }
 
       shape.setAttribute(

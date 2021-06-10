@@ -50,6 +50,10 @@
         <div class="textcontainer" id="textcontainer1">
           <h1 class="nodisplay" id="text1">When once the sky was blue</h1>
           <h2 class="nodisplay" id="text2">a virtual experience</h2>
+          <div class="centerButton nodisplay" id="startButtonContainer">
+            <a href="#" id="toScene" class="" onclick="fadein()">Enter the World</a>
+          </div>
+          
         </div>
         <div class="textcontainer nodisplay roboticfont" id="textcontainer2">
           <h1 id="text3">
@@ -74,9 +78,7 @@
           </h2>
         </div>
         <div class="textcontainer nodisplay roboticfont" id="textcontainer5">
-          <div class="centerButton">
-            <a href="#" id="toScene" onclick="fadein()">Enter the World</a>
-          </div>
+          
         </div>
       </div>
     </div>
@@ -104,6 +106,8 @@
         <a-asset-item id="francis-1-mtl" src="static/francis1.mtl"></a-asset-item>
         <a-asset-item id="francis-2-obj" src="static/francis2.obj"></a-asset-item>
         <a-asset-item id="francis-2-mtl" src="static/francis2.mtl"></a-asset-item>
+        <a-asset-item id="francis-3-obj" src="static/francis1.obj"></a-asset-item>
+        <a-asset-item id="francis-3-mtl" src="static/francis1.mtl"></a-asset-item>
         <a-asset-item
           id="francis-color-obj"
           src="static/colours/cloak_red.obj"
@@ -180,7 +184,7 @@
           animation="property: color; dir: alternate; dur: 1800; delay: 50; loop: false; repeat: 1; from: #000000; to: #ffffff; autoplay: false"
         >
         </a-sky>
-        <a-entity position="0 1 0">
+        <a-entity position="0 3 0">
           <a-entity camera foo look-controls wasd-controls id="lobbyCam">
             <!-- this is the cursor, the startEvents: click is what triggers transitions in #francis1 #francis2 #francis3-->
             <!-- code taken from this example: https://codepen.io/Perhelion/pen/gOavybJ
@@ -303,7 +307,7 @@
 
 <!-- shadowsss -->
 
-        <a-plane
+        <!-- <a-plane
         id="shadow0"
         visible="false"
         material="src: #shadow; transparent: true"
@@ -382,7 +386,7 @@
         position="-54.006 1 17.036"
         scale="10 10 10"
         look-at="#lobbyCam"
-        ></a-plane>
+        ></a-plane> -->
 
 <!-- shadowsss -->
 
