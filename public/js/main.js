@@ -62,7 +62,10 @@ AFRAME.registerComponent("foo", {
       //Initial light transitions are not triggered in this script, they are native to a-frame with the cursor object triggering the light when the hover is long enough.
       //light not too intense, trigger animation with a full screen HTML element and fade it in.
       //need to see which francis' light triggered this, in this case checking if it is #francis1
-
+      document.getElementById("performance_1_audio").pause();
+      document.getElementById("performance_2_audio").pause();
+      document.getElementById("performance_3_audio").pause();
+      document.getElementById("player").play();
       if (
         document.querySelector("#francis1").components.light.light.intensity >
         0.1
@@ -87,7 +90,7 @@ AFRAME.registerComponent("foo", {
           skyElementFirst.setAttribute("animation", "autoplay", true);
           lobbySkyTransition.setAttribute("material", "color", "rgb(0, 0, 0)");
           // trigger audio
-          var myAudio = document.getElementById("performance_of_the_ground");
+          var myAudio = document.getElementById("performance_1_audio");
           myAudio.play();
           myAudio.volume = 0.6;
           //first text container
@@ -162,6 +165,7 @@ AFRAME.registerComponent("foo", {
     //Scene 3: if plane is far enough below the user.
     // even though this says state 2, this is still referring to the first francis and its associated scene (cubes and mountains)
     if (state == 2) {
+      document.getElementById("player").pause();
       if (skyElementSecond.components.material.material.color.r <= 0.3) {
         skyElementSecond.setAttribute(
           "material",
@@ -191,6 +195,7 @@ AFRAME.registerComponent("foo", {
     // even though this says state 3, this is still referring to the second francis and its associated scene (embers)
 
     if (state == 3) {
+      document.getElementById("player").pause();
       if (skyElementFirst.components.material.material.color.g < 0.37) {
         $("#panelToFadeBetweenScenes").fadeIn(1900);
         setTimeout(function () {
@@ -199,7 +204,7 @@ AFRAME.registerComponent("foo", {
           changedFrancis1.setAttribute("visible", true);
           scene1El.setAttribute("visible", false);
           lobbyEl.setAttribute("visible", true);
-          var myAudio = document.getElementById("ground_addition_to_base");
+          var myAudio = document.getElementById("addition_2_audio");
           myAudio.play();
           this.cam.setAttribute("position", {
             x: 0,
@@ -211,6 +216,7 @@ AFRAME.registerComponent("foo", {
     }
     // even though this says state 4, this is still referring to the third francis and its associated scene (stars and falling plane)
     if (state == 4) {
+      document.getElementById("player").pause();
       if (time < 5000) {} else {
         planePos -= 0.02;
         console.log("planePos is: " + planePos);

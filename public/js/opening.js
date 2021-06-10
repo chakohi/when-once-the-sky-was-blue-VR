@@ -6,27 +6,30 @@ $(document).ready(function() {
   //   document.getElementById("audio_error_text").style.display = "block";
 
   // });
-  navigator.getUserMedia =
-    navigator.getUserMedia ||
-    navigator.webkitGetUserMedia ||
-    navigator.mozGetUserMedia ||
-    navigator.msGetUserMedia;
+  // navigator.getUserMedia =
+  //   navigator.getUserMedia ||
+  //   navigator.webkitGetUserMedia ||
+  //   navigator.mozGetUserMedia ||
+  //   navigator.msGetUserMedia;
 
-  if (navigator.getUserMedia) {
-    navigator.getUserMedia(
-      { audio: true },
-      function onSuccess(stream) {
-        // go play
-        console.log("yaaaaay wohhooooo");
-        document.getElementById("player").play();
-      },
-      function onError(error) {
-        console.log("naaaaah why u mad at me");
-      }
-    );
-  } else {
-    console.log("very bad browser faaaam");
-  }
+  // if (navigator.getUserMedia) {
+  //   navigator.getUserMedia(
+  //     { audio: true },
+  //     function onSuccess(stream) {
+  //       // go play
+  //       console.log("yaaaaay wohhooooo");
+  //       document.getElementById("player").play();
+  //     },
+  //     function onError(error) {
+  //       console.log("naaaaah why u mad at me");
+  //     }
+  //   );
+  // } else {
+  //   console.log("very bad browser faaaam");
+  // }
+
+
+
   //3 seconds transition time
   // prod time below
   // var transitiontime = 6500;
@@ -86,6 +89,7 @@ sceneButton.addEventListener("click", () => {
   fadeInScreen.style.zIndex = 10;
   sceneButton.style.zIndex = 1;
   fadeInScreen.classList.toggle("fadeInWhite");
+  document.getElementById("player").play();
   // var timeoutID = setTimeout(timeout(), 3000);
   setTimeout(function() {
     timeout();
