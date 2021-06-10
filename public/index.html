@@ -11,7 +11,10 @@
   </head>
 
   <body>
-    <audio id="player" autoplay allow="autoplay">
+    <audio id="base_layer_always_on" loop>
+      <source src="sounds/new/0_addition to base_synth+sounds.mp3" type="audio/mp3" />
+    </audio>
+    <audio id="player" autoplay noloop allow="autoplay">
       <source src="sounds/new/0_opening VO.mp3" type="audio/mp3" />
     </audio>
     <audio id="ground_addition_to_base">
@@ -40,6 +43,10 @@
         <div class="textcontainer" id="textcontainer1">
           <h1 class="nodisplay" id="text1">When once the sky was blue</h1>
           <h2 class="nodisplay" id="text2">a virtual experience</h2>
+          <div class="centerButton nodisplay" id="startButtonContainer">
+            <a href="#" id="toScene" class="" onclick="fadein()">Enter the World</a>
+          </div>
+          
         </div>
         <div class="textcontainer nodisplay roboticfont" id="textcontainer2">
           <h1 id="text3">
@@ -64,9 +71,13 @@
           </h2>
         </div>
         <div class="textcontainer nodisplay roboticfont" id="textcontainer5">
+<<<<<<< HEAD
           <div class="centerButton">
             <a href="#" id="toScene" onclick="">Enter the World</a>
           </div>
+=======
+          
+>>>>>>> tmp
         </div>
       </div>
     </div>
@@ -175,7 +186,11 @@
           animation="property: color; dir: alternate; dur: 1800; delay: 50; loop: false; repeat: 1; from: #000000; to: #ffffff; autoplay: false"
         >
         </a-sky>
+<<<<<<< HEAD
         <a-entity position="0 3 0">
+=======
+        <a-entity position="0 3.5 0">
+>>>>>>> tmp
           <a-entity camera foo look-controls wasd-controls id="lobbyCam">
             <!-- this is the cursor, the startEvents: click is what triggers transitions in #francis1 #francis2 #francis3-->
             <!-- code taken from this example: https://codepen.io/Perhelion/pen/gOavybJ
@@ -286,7 +301,7 @@
 
 <!-- shadowsss -->
 
-        <a-plane
+        <!-- <a-plane
         id="shadow0"
         visible="false"
         material="src: #shadow; transparent: true"
@@ -365,7 +380,7 @@
         position="-54.006 1 17.036"
         scale="10 10 10"
         look-at="#lobbyCam"
-        ></a-plane>
+        ></a-plane> -->
 
 <!-- shadowsss -->
 

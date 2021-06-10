@@ -31,9 +31,33 @@ $(document).ready(function() {
   // prod time below
   // var transitiontime = 6500;
   //dev time below so that it is quicker for testing
-  var transitiontime = 10;
-  //first text container
+
   $("#text1").fadeIn(4500);
+  $("#text2").fadeIn(4500);
+  $("#startButtonContainer").fadeIn(4500);
+  //first text container
+});
+
+function reload() {
+  window.location.reload(false);
+}
+var scene = document.querySelector("a-scene");
+var isChrome =
+  /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+if (!isChrome) {
+  $("#iframeAudio").remove();
+} else {
+  $("#playAudio").remove(); // just to make sure that it will not have 2x audio in the background
+}
+
+var socket = io().connect();
+
+var fadeInScreen = document.getElementById("fullscreenFadeIn");
+const sceneButton = document.querySelector("#toScene");
+var transitiontime = 10;
+
+sceneButton.addEventListener("click", () => {
+  playIntro();
   setTimeout(function() {
     $("#text2").fadeIn(4000);
     //second textcontainer
@@ -54,7 +78,15 @@ $(document).ready(function() {
                 $("#textcontainer3").remove();
                 setTimeout(function() {
                   $("#textcontainer4").fadeOut(1900);
-                  $("#textcontainer5").fadeIn(4500);
+                  fadeInScreen.style.zIndex = 10;
+                  sceneButton.style.zIndex = 1;
+                  fadeInScreen.classList.toggle("fadeInWhite");
+                  $("#textcontainer4").remove();
+                  document.getElementById("player").play();
+                  // var timeoutID = setTimeout(timeout(), 3000);
+                  setTimeout(function() {
+                    timeout();
+                  }, 4000);
                 }, transitiontime);
               }, 2000);
             }, transitiontime);
@@ -63,33 +95,6 @@ $(document).ready(function() {
       }, 2000);
     }, transitiontime);
   }, transitiontime);
-});
-
-function reload() {
-  window.location.reload(false);
-}
-var scene = document.querySelector("a-scene");
-var isChrome =
-  /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-if (!isChrome) {
-  $("#iframeAudio").remove();
-} else {
-  $("#playAudio").remove(); // just to make sure that it will not have 2x audio in the background
-}
-
-var socket = io().connect();
-
-var fadeInScreen = document.getElementById("fullscreenFadeIn");
-const sceneButton = document.querySelector("#toScene");
-
-sceneButton.addEventListener("click", () => {
-  fadeInScreen.style.zIndex = 10;
-  sceneButton.style.zIndex = 1;
-  fadeInScreen.classList.toggle("fadeInWhite");
-  // var timeoutID = setTimeout(timeout(), 3000);
-  setTimeout(function() {
-    timeout();
-  }, 4000);
 });
 
 function timeout() {
@@ -104,4 +109,8 @@ function timeout() {
   setTimeout(function() {
     document.querySelector("#openingTitle").remove();
   }, 400);
+}
+
+function playIntro(){
+  
 }
