@@ -58,14 +58,19 @@ AFRAME.registerComponent("foo", {
   },
   tick: function (time) {
     if (state == 0) {
-      //transition  to other scene is triggered once light attached to each francis reaches a certain value.
-      //Initial light transitions are not triggered in this script, they are native to a-frame with the cursor object triggering the light when the hover is long enough.
-      //light not too intense, trigger animation with a full screen HTML element and fade it in.
-      //need to see which francis' light triggered this, in this case checking if it is #francis1
+
+      // pause all playing audio, and start the lobby audio TODO:: change to expected behavior
+
       document.getElementById("performance_1_audio").pause();
       document.getElementById("performance_2_audio").pause();
       document.getElementById("performance_3_audio").pause();
       document.getElementById("player").play();
+      
+      //transition  to other scene is triggered once light attached to each francis reaches a certain value.
+      //Initial light transitions are not triggered in this script, they are native to a-frame with the cursor object triggering the light when the hover is long enough.
+      //light not too intense, trigger animation with a full screen HTML element and fade it in.
+      //need to see which francis' light triggered this, in this case checking if it is #francis1
+      console.log("francis 1 light intensity is: ",document.querySelector("#francis1").components.light.light.intensity)
       if (
         document.querySelector("#francis1").components.light.light.intensity >
         0.1

@@ -75,7 +75,7 @@
         </div>
         <div class="textcontainer nodisplay roboticfont" id="textcontainer5">
           <div class="centerButton">
-            <a href="#" id="toScene" onclick="fadein()">Enter the World</a>
+            <a href="#" id="toScene" onclick="">Enter the World</a>
           </div>
         </div>
       </div>
@@ -93,6 +93,7 @@
     <a-scene
       loading-screen="dotsColor: black; backgroundColor: black"
       vr-mode-ui="enabled: false"
+      debug
     >
       <!-- <a-scene
     loading-screen="dotsColor: white; backgroundColor: black"
@@ -100,10 +101,14 @@
   > -->
       <a-assets>
         <img id="shadow" crossorigin="anonymous" src="static/shadow.png" />
+        <a-asset-item id="francis-obj" src="static/cloak.obj"></a-asset-item>
+        <a-asset-item id="francis-mtl" src="static/cloak.mtl"></a-asset-item>
         <a-asset-item id="francis-1-obj" src="static/francis1.obj"></a-asset-item>
         <a-asset-item id="francis-1-mtl" src="static/francis1.mtl"></a-asset-item>
         <a-asset-item id="francis-2-obj" src="static/francis2.obj"></a-asset-item>
         <a-asset-item id="francis-2-mtl" src="static/francis2.mtl"></a-asset-item>
+        <a-asset-item id="francis-3-obj" src="static/francis1.obj"></a-asset-item>
+        <a-asset-item id="francis-3-mtl" src="static/francis1.mtl"></a-asset-item>
         <a-asset-item
           id="francis-color-obj"
           src="static/colours/cloak_red.obj"
@@ -180,7 +185,7 @@
           animation="property: color; dir: alternate; dur: 1800; delay: 50; loop: false; repeat: 1; from: #000000; to: #ffffff; autoplay: false"
         >
         </a-sky>
-        <a-entity position="0 1 0">
+        <a-entity position="0 3 0">
           <a-entity camera foo look-controls wasd-controls id="lobbyCam">
             <!-- this is the cursor, the startEvents: click is what triggers transitions in #francis1 #francis2 #francis3-->
             <!-- code taken from this example: https://codepen.io/Perhelion/pen/gOavybJ
@@ -195,7 +200,7 @@
               animation__fusing="property: geometry.thetaLength; startEvents: fusing; easing: easeInCubic; dur: 1500; from: 0; to: 359"
               animation__mouseleave="property: geometry.thetaLength; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 0"
               geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.035;"
-              material="color: black; shader: flat; opacity: 1"
+              material="color: white; shader: flat; opacity: 1"
               cursor="maxDistance: 3; fuse: true"
               raycaster="far: 3; objects: .francis"
             >
@@ -245,23 +250,11 @@
           distance="3.6"
           position="-5 1 -3"
           animation="property: intensity; dur: 4000;
-       from: 0.6; to: 8;
-       loop: false; reapeat: 3; dir: alternate; autoplay: false"
+          from: 0.6; to: 8;
+          loop: false; reapeat: 3; dir: alternate; autoplay: false"
         >
         </a-light>
         <!-- "startEvents: click;" triggers bright light transition animation with raycast on reticle object. -->
-        <a-entity
-          francis1mouseenter
-          id="francis1"
-          class="francis"
-          obj-model="obj: #francis-1-obj; mtl: #francis-1-mtl"
-          position="-5.048 -0.238 -3"
-          scale="0.03 0.03 0.03"
-          rotation="0 50 0"
-          light="type: hemisphere; color: white; intensity: 0;"
-          animation__rotation="property: light.intensity; from:0; to: 8; loop: 1; dur: 2000; delay:100; dir: alternate; startEvents: click;"
-        >
-        </a-entity>
         <a-entity
           francis1mouseenter
           id="francisColorOne"
@@ -272,7 +265,7 @@
           rotation="0 50 0"
           visible="false"
           light="type: hemisphere; color: white; intensity: 0;"
-          animation__rotation="property: light.intensity; from:0; to: 8; loop: 1; dur: 2000; delay:100; dir: alternate; startEvents: click;"
+          animation__rotation="property: light.intensity; from: 0; to: 8; loop: 1; dur: 2000; delay:100; dir: alternate; startEvents: click;"
         >
         </a-entity>
         <a-light
@@ -283,8 +276,8 @@
           distance="3.6"
           position="0 1 -6"
           animation="property: intensity; dur: 4000;
-     from: 0.6; to: 8;
-     loop: false; reapeat: 3; dir: alternate; autoplay: false"
+          from: 0.6; to: 8;
+          loop: false; reapeat: 3; dir: alternate; autoplay: false"
         >
         </a-light>
         <a-light
@@ -295,8 +288,8 @@
           distance="3.6"
           position="4.748 0.4 -3"
           animation="property: intensity; dur: 4000;
-   from: 0.6; to: 8;
-   loop: false; reapeat: 3; dir: alternate; autoplay: false"
+          from: 0.6; to: 8;
+          loop: false; reapeat: 3; dir: alternate; autoplay: false"
         >
         </a-light>
   
@@ -386,10 +379,19 @@
 
 <!-- shadowsss -->
 
-
-
-
         <!-- event from cursor is what triggers this, triggered when the cursor reticls becomes a full circle. -->
+        <a-entity
+        francis1mouseenter
+        id="francis1"
+        class="francis"
+        obj-model="obj: #francis-1-obj; mtl: #francis-1-mtl"
+        position="-5.048 -0.238 -3"
+        scale="0.03 0.03 0.03"
+        rotation="0 50 0"
+        light="type: hemisphere; color: white; intensity: 0;"
+        animation__rotation="property: light.intensity; from:0; to: 8; loop: 1; dur: 2000; delay:100; dir: alternate; startEvents: click;"
+        >
+        </a-entity>
         <a-entity
           francis2mouseenter
           id="francis2"
@@ -404,7 +406,7 @@
           francis3mouseenter
           id="francis3"
           class="francis"
-          obj-model="obj: #francis-1-obj; mtl: #francis-1-mtl"
+          obj-model="obj: #francis-3-obj; mtl: #francis-3-mtl"
           position="4.748 -0.238 -3"
           scale="0.03 0.03 0.03"
           rotation="0 -50 0"
