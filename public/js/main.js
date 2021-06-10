@@ -95,7 +95,7 @@ AFRAME.registerComponent("foo", {
           skyElementFirst.setAttribute("animation", "autoplay", true);
           lobbySkyTransition.setAttribute("material", "color", "rgb(0, 0, 0)");
           // trigger audio
-          var myAudio = document.getElementById("performance_1_audio");
+          var myAudio = document.getElementById("performance_of_the_ground");
           myAudio.play();
           myAudio.volume = 0.6;
           //first text container
@@ -170,7 +170,6 @@ AFRAME.registerComponent("foo", {
     //Scene 3: if plane is far enough below the user.
     // even though this says state 2, this is still referring to the first francis and its associated scene (cubes and mountains)
     if (state == 2) {
-      document.getElementById("player").pause();
       if (skyElementSecond.components.material.material.color.r <= 0.3) {
         skyElementSecond.setAttribute(
           "material",
@@ -200,7 +199,6 @@ AFRAME.registerComponent("foo", {
     // even though this says state 3, this is still referring to the second francis and its associated scene (embers)
 
     if (state == 3) {
-      document.getElementById("player").pause();
       if (skyElementFirst.components.material.material.color.g < 0.37) {
         $("#panelToFadeBetweenScenes").fadeIn(1900);
         setTimeout(function () {
@@ -209,7 +207,7 @@ AFRAME.registerComponent("foo", {
           changedFrancis1.setAttribute("visible", true);
           scene1El.setAttribute("visible", false);
           lobbyEl.setAttribute("visible", true);
-          var myAudio = document.getElementById("addition_2_audio");
+          var myAudio = document.getElementById("ground_addition_to_base");
           myAudio.play();
           this.cam.setAttribute("position", {
             x: 0,
@@ -221,7 +219,6 @@ AFRAME.registerComponent("foo", {
     }
     // even though this says state 4, this is still referring to the third francis and its associated scene (stars and falling plane)
     if (state == 4) {
-      document.getElementById("player").pause();
       if (time < 5000) {} else {
         planePos -= 0.02;
         console.log("planePos is: " + planePos);
