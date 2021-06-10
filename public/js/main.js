@@ -344,7 +344,7 @@ AFRAME.registerComponent("shaperain", {
     this.shapesreference = [];
     let objects_per_shape = 10;
     // this.shapes = [];
-    let size = 0.4w,
+    let size = 0.4,
       spacing = 1,
       x;
     let sceneEl = document.querySelector("#firstPerformance");

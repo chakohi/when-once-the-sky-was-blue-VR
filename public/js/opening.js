@@ -61,24 +61,6 @@ var transitiontime = 10;
 
 sceneButton.addEventListener("click", () => {
   playIntro();
-  
-});
-
-function timeout() {
-  console.log("it's done");
-  // window.location.href = "http://localhost:3000/performance";
-  //             $("#textcontainer4").remove();
-  document.querySelector("#waitOnMe").remove();
-  scene.play();
-  var myAudio = document.getElementById("base_layer_always_on");
-  myAudio.play();
-  myAudio.volume = 0.8;
-  setTimeout(function() {
-    document.querySelector("#openingTitle").remove();
-  }, 400);
-}
-
-function playIntro(){
   setTimeout(function() {
     $("#text2").fadeIn(4000);
     //second textcontainer
@@ -102,11 +84,12 @@ function playIntro(){
                   fadeInScreen.style.zIndex = 10;
                   sceneButton.style.zIndex = 1;
                   fadeInScreen.classList.toggle("fadeInWhite");
+                  $("#textcontainer4").remove();
                   document.getElementById("player").play();
                   // var timeoutID = setTimeout(timeout(), 3000);
                   setTimeout(function() {
-    timeout();
-  }, 4000);
+                    timeout();
+                  }, 4000);
                 }, transitiontime);
               }, 2000);
             }, transitiontime);
@@ -115,4 +98,22 @@ function playIntro(){
       }, 2000);
     }, transitiontime);
   }, transitiontime);
+});
+
+function timeout() {
+  console.log("it's done");
+  // window.location.href = "http://localhost:3000/performance";
+  //             $("#textcontainer4").remove();
+  document.querySelector("#waitOnMe").remove();
+  scene.play();
+  var myAudio = document.getElementById("base_layer_always_on");
+  myAudio.play();
+  myAudio.volume = 0.8;
+  setTimeout(function() {
+    document.querySelector("#openingTitle").remove();
+  }, 400);
+}
+
+function playIntro(){
+  
 }
